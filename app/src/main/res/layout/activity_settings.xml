@@ -30,7 +30,7 @@
                 android:text="@string/settings"
                 android:fontFamily="@font/yandex_sans_text_medium"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="@dimen/tittle_text_size"
                 app:icon="@drawable/magnifier"
                 app:iconGravity="textStart" />
         </LinearLayout>
@@ -48,21 +48,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/yandex_sans_display_regular"
                     android:paddingVertical="@dimen/settings_vertical_padding"
                     android:paddingHorizontal="@dimen/settings_horizontal_padding"
                     android:text="@string/dark_mode"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/bottom_text_size" />
 
                 <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:checked="true"
-                    android:paddingVertical="21dp"
-                    android:paddingRight="16dp"
+                    android:paddingVertical="@dimen/settings_vertical_padding"
+                    android:paddingHorizontal="@dimen/settings_horizontal_padding"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </FrameLayout>
 
@@ -74,23 +74,22 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/yandex_sans_display_regular"
                     android:paddingVertical="@dimen/settings_vertical_padding"
                     android:paddingHorizontal="@dimen/settings_horizontal_padding"
                     android:text="@string/share_app"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/bottom_text_size" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
                     android:backgroundTint="@color/white"
-                    android:outlineSpotShadowColor="@color/white"
-                    android:paddingTop="19dp"
-                    android:paddingRight="12dp"
-                    android:paddingBottom="18dp"
+                    android:paddingVertical="@dimen/settings_vertical_padding"
+                    android:paddingStart="@dimen/settings_bottom_start_padding"
+                    android:paddingEnd="@dimen/settings_bottom_end_padding"
                     app:icon="@drawable/share_icon"
                     app:iconTint="@color/gray" />
             </FrameLayout>
@@ -98,18 +97,19 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/yandex_sans_display_regular"
                     android:paddingVertical="@dimen/settings_vertical_padding"
                     android:paddingHorizontal="16dp"
                     android:text="@string/write_support"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/bottom_text_size" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -117,9 +117,9 @@
                     android:layout_gravity="end"
                     android:backgroundTint="@color/white"
                     android:outlineSpotShadowColor="@color/white"
-                    android:paddingTop="19dp"
-                    android:paddingRight="12dp"
-                    android:paddingBottom="18dp"
+                    android:paddingVertical="@dimen/settings_vertical_padding"
+                    android:paddingStart="@dimen/settings_bottom_start_padding"
+                    android:paddingEnd="@dimen/settings_bottom_end_padding"
                     app:icon="@drawable/support_icon"
                     app:iconTint="@color/gray" />
             </FrameLayout>
@@ -132,13 +132,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/yandex_sans_display_regular"
                     android:paddingVertical="@dimen/settings_vertical_padding"
                     android:paddingHorizontal="@dimen/settings_horizontal_padding"
                     android:text="@string/agreement"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/bottom_text_size" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -146,10 +146,10 @@
                     android:layout_gravity="end"
                     android:backgroundTint="@color/white"
                     android:outlineSpotShadowColor="@color/white"
-                    android:paddingTop="19dp"
-                    android:paddingRight="12dp"
-                    android:paddingBottom="18dp"
-                    app:icon="@drawable/arrow_forward_simpl_icon"
+                    android:paddingVertical="@dimen/settings_vertical_padding"
+                    android:paddingStart="@dimen/settings_bottom_start_padding"
+                    android:paddingEnd="@dimen/settings_bottom_end_padding"
+                    app:icon="@drawable/arrow_forward_simple_icon"
                     app:iconTint="@color/gray" />
             </FrameLayout>
         </LinearLayout>
