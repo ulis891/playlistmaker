@@ -34,6 +34,7 @@
             android:textColor="@color/white"/>
 
         <Button
+            android:id="@+id/button_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -47,9 +48,10 @@
             app:icon="@drawable/magnifier"
             app:iconGravity="textStart"
             app:iconTint="@color/black"
-            tools:ignore="VisualLintButtonSize" />
+            android:foreground="?attr/selectableItemBackground"/>
 
         <Button
+            android:id="@+id/button_media"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -63,9 +65,10 @@
             app:icon="@drawable/media_icon"
             app:iconGravity="textStart"
             app:iconTint="@color/black"
-            tools:ignore="VisualLintButtonSize" />
+            android:foreground="?attr/selectableItemBackground"/>
 
         <Button
+            android:id="@+id/button_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -79,7 +82,7 @@
             app:icon="@drawable/settings_icon"
             app:iconGravity="textStart"
             app:iconTint="@color/black"
-            tools:ignore="VisualLintButtonSize" />
+            android:foreground="?attr/selectableItemBackground"/>
 
     </LinearLayout>
 
