@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:outlineSpotShadowColor="@color/white"
-                app:icon="@drawable/arrow_back_icon"
+                app:icon="@drawable/ic_arrow_back_24"
                 app:iconTint="@color/black" />
             <TextView
                 android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                 android:fontFamily="@font/yandex_sans_text_medium"
                 android:textColor="@color/black"
                 android:textSize="@dimen/tittle_text_size"
-                app:icon="@drawable/magnifier"
+                app:icon="@drawable/ic_magnifier_24"
                 app:iconGravity="textStart" />
         </LinearLayout>
 
@@ -92,7 +92,7 @@
                     android:paddingVertical="@dimen/settings_vertical_padding"
                     android:paddingStart="@dimen/settings_bottom_start_padding"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
-                    app:icon="@drawable/share_icon"
+                    app:icon="@drawable/ic_share_24"
                     app:iconTint="@color/gray" />
             </FrameLayout>
 
@@ -122,7 +122,7 @@
                     android:paddingVertical="@dimen/settings_vertical_padding"
                     android:paddingStart="@dimen/settings_bottom_start_padding"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
-                    app:icon="@drawable/support_icon"
+                    app:icon="@drawable/ic_support_24"
                     app:iconTint="@color/gray" />
             </FrameLayout>
 
@@ -151,7 +151,7 @@
                     android:paddingVertical="@dimen/settings_vertical_padding"
                     android:paddingStart="@dimen/settings_bottom_start_padding"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
-                    app:icon="@drawable/arrow_forward_simple_icon"
+                    app:icon="@drawable/ic_arrow_forward_simple_24"
                     app:iconTint="@color/gray" />
             </FrameLayout>
         </LinearLayout>

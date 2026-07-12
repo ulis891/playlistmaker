@@ -45,7 +45,7 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/white"
             app:cornerRadius="16dp"
-            app:icon="@drawable/magnifier"
+            app:icon="@drawable/ic_magnifier_24"
             app:iconGravity="textStart"
             app:iconTint="@color/black"
             android:foreground="?attr/selectableItemBackground"/>
@@ -62,7 +62,7 @@
             android:text="@string/media"
             android:textColor="@color/black"
             app:cornerRadius="16dp"
-            app:icon="@drawable/media_icon"
+            app:icon="@drawable/ic_media_24"
             app:iconGravity="textStart"
             app:iconTint="@color/black"
             android:foreground="?attr/selectableItemBackground"/>
@@ -79,7 +79,7 @@
             android:text="@string/settings"
             android:textColor="@color/black"
             app:cornerRadius="16dp"
-            app:icon="@drawable/settings_icon"
+            app:icon="@drawable/ic_settings_24"
             app:iconGravity="textStart"
             app:iconTint="@color/black"
             android:foreground="?attr/selectableItemBackground"/>
