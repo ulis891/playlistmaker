@@ -17,10 +17,12 @@ class MainActivity : AppCompatActivity() {
         val buttonSettings = findViewById<Button>(R.id.button_settings)
 
         buttonSearch.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Нажали на поиск!", Toast.LENGTH_SHORT).show()
+            val searchIntent = Intent(this, SearchActivity::class.java)
+            startActivity(searchIntent)
         }
         buttonMedia.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Нажали на медиатеку!", Toast.LENGTH_SHORT).show()
+            val mediaIntent = Intent(this, MediaActivity::class.java)
+            startActivity(mediaIntent)
         }
 
         buttonSettings.setOnClickListener{
