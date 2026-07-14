@@ -16,25 +16,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="24dp"
+            tools:ignore="UseCompoundDrawables">
 
-            <Button
+            <ImageView
                 android:id="@+id/baсk_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:outlineSpotShadowColor="@color/white"
-                app:icon="@drawable/ic_arrow_back_24"
+                android:layout_marginVertical="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="0dp"
+                android:contentDescription="@string/go_back"
+                android:padding="13dp"
+                android:src="@drawable/ic_arrow_back_24"
                 app:iconTint="@color/black" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginVertical="4dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="10dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="0dp"
                 android:text="@string/settings"
                 android:fontFamily="@font/yandex_sans_text_medium"
                 android:textColor="@color/black"
-                android:textSize="@dimen/tittle_text_size"
-                app:icon="@drawable/ic_magnifier_24"
-                app:iconGravity="textStart" />
+                android:textSize="@dimen/tittle_text_size"/>
         </LinearLayout>
 
         <LinearLayout
@@ -42,119 +50,131 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <FrameLayout
+            <LinearLayout
+                android:id="@+id/clickable_dark_mode_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingVertical="@dimen/settings_vertical_padding">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:fontFamily="@font/yandex_sans_display_regular"
-                    android:paddingVertical="@dimen/settings_vertical_padding"
-                    android:paddingHorizontal="@dimen/settings_horizontal_padding"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/settings_horizontal_padding"
+                    android:layout_marginEnd="@dimen/settings_horizontal_padding"
                     android:text="@string/dark_mode"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/bottom_text_size" />
+                    android:textSize="@dimen/bottom_text_size"
+                    android:fontFamily="@font/yandex_sans_display_regular"/>
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_dark_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:checked="true"
-                    android:paddingVertical="@dimen/settings_vertical_padding"
-                    android:paddingHorizontal="@dimen/settings_horizontal_padding"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-            </FrameLayout>
+                    android:layout_marginEnd="6dp"
+                    android:text="" />
 
-            <FrameLayout
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/clickable_share_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/settings_vertical_padding"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:fontFamily="@font/yandex_sans_display_regular"
-                    android:paddingVertical="@dimen/settings_vertical_padding"
-                    android:paddingHorizontal="@dimen/settings_horizontal_padding"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/settings_horizontal_padding"
+                    android:layout_marginEnd="@dimen/settings_bottom_start_padding"
                     android:text="@string/share_app"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/bottom_text_size" />
+                    android:textSize="@dimen/bottom_text_size"
+                    android:fontFamily="@font/yandex_sans_display_regular"/>
 
-                <Button
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:backgroundTint="@color/white"
-                    android:background=""
-                    android:paddingVertical="@dimen/settings_vertical_padding"
-                    android:paddingStart="@dimen/settings_bottom_start_padding"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_share_24"
+                    android:paddingStart="0dp"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
-                    app:icon="@drawable/ic_share_24"
-                    app:iconTint="@color/gray" />
-            </FrameLayout>
+                    android:contentDescription="@string/share_app"
+                    app:tint="@color/gray" />
 
-            <FrameLayout
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/clickable_support_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/settings_vertical_padding"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:fontFamily="@font/yandex_sans_display_regular"
-                    android:paddingVertical="@dimen/settings_vertical_padding"
-                    android:paddingHorizontal="@dimen/settings_horizontal_padding"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/settings_horizontal_padding"
+                    android:layout_marginEnd="@dimen/settings_bottom_start_padding"
                     android:text="@string/write_support"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/bottom_text_size" />
+                    android:textSize="@dimen/bottom_text_size"
+                    android:fontFamily="@font/yandex_sans_display_regular" />
 
-                <Button
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:backgroundTint="@color/white"
-                    android:outlineSpotShadowColor="@color/white"
-                    android:paddingVertical="@dimen/settings_vertical_padding"
-                    android:paddingStart="@dimen/settings_bottom_start_padding"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_support_24"
+                    android:paddingStart="0dp"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
-                    app:icon="@drawable/ic_support_24"
-                    app:iconTint="@color/gray" />
-            </FrameLayout>
+                    android:contentDescription="@string/share_app"
+                    app:tint="@color/gray" />
 
-            <FrameLayout
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/clickable_agreement_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/settings_vertical_padding"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:fontFamily="@font/yandex_sans_display_regular"
-                    android:paddingVertical="@dimen/settings_vertical_padding"
-                    android:paddingHorizontal="@dimen/settings_horizontal_padding"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/settings_horizontal_padding"
+                    android:layout_marginEnd="@dimen/settings_bottom_start_padding"
                     android:text="@string/agreement"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/bottom_text_size" />
+                    android:textSize="@dimen/bottom_text_size"
+                    android:fontFamily="@font/yandex_sans_display_regular" />
 
-                <Button
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:backgroundTint="@color/white"
-                    android:outlineSpotShadowColor="@color/white"
-                    android:paddingVertical="@dimen/settings_vertical_padding"
-                    android:paddingStart="@dimen/settings_bottom_start_padding"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_forward_simple_24"
+                    android:paddingStart="0dp"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
-                    app:icon="@drawable/ic_arrow_forward_simple_24"
-                    app:iconTint="@color/gray" />
-            </FrameLayout>
+                    android:contentDescription="@string/share_app"
+                    app:tint="@color/gray" />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
