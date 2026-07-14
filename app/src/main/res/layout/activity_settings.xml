@@ -89,6 +89,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
                     android:backgroundTint="@color/white"
+                    android:background=""
                     android:paddingVertical="@dimen/settings_vertical_padding"
                     android:paddingStart="@dimen/settings_bottom_start_padding"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
