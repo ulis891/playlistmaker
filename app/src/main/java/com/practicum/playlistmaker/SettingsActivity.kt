@@ -1,7 +1,7 @@
 package com.practicum.playlistmaker
 
 import android.os.Bundle
-import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,7 +18,7 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        val backArrow = findViewById<Button>(R.id.baсk_arrow)
+        val backArrow = findViewById<ImageView>(R.id.baсk_arrow)
 
         backArrow.setOnClickListener{ finish() }
     }
