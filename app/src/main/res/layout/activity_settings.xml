@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/settings_horizontal_padding"
-                    android:layout_marginEnd="@dimen/settings_horizontal_padding"
+                    android:layout_marginEnd="@dimen/settings_bottom_start_padding"
                     android:text="@string/dark_mode"
                     android:textColor="@color/black"
                     android:textSize="@dimen/bottom_text_size"
