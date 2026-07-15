@@ -18,7 +18,7 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        val backArrow = findViewById<ImageView>(R.id.baсk_arrow)
+        val backArrow = findViewById<ImageView>(R.id.back_arrow)
 
         backArrow.setOnClickListener{ finish() }
     }
