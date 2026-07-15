@@ -6,4 +6,5 @@
     <dimen name="settings_horizontal_padding">16dp</dimen>
     <dimen name="settings_bottom_start_padding">50dp</dimen>
     <dimen name="settings_bottom_end_padding">12dp</dimen>
+    <dimen name="zero">0dp</dimen>
 </resources>

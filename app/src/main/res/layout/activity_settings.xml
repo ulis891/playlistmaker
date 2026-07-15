@@ -61,7 +61,7 @@
                 android:paddingVertical="@dimen/settings_vertical_padding">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/settings_horizontal_padding"
@@ -91,7 +91,7 @@
                 android:clickable="true">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/settings_horizontal_padding"
@@ -105,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_share_24"
-                    android:paddingStart="0dp"
+                    android:paddingStart="@dimen/zero"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
                     android:contentDescription="@string/share_app"
                     app:tint="@color/gray" />
@@ -123,7 +123,7 @@
                 android:clickable="true">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/settings_horizontal_padding"
@@ -137,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_support_24"
-                    android:paddingStart="0dp"
+                    android:paddingStart="@dimen/zero"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
                     android:contentDescription="@string/share_app"
                     app:tint="@color/gray" />
@@ -155,7 +155,7 @@
                 android:clickable="true">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/settings_horizontal_padding"
@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_arrow_forward_simple_24"
-                    android:paddingStart="0dp"
+                    android:paddingStart="@dimen/zero"
                     android:paddingEnd="@dimen/settings_bottom_end_padding"
                     android:contentDescription="@string/share_app"
                     app:tint="@color/gray" />
