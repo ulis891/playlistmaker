@@ -51,14 +51,7 @@
 
             <LinearLayout
                 android:id="@+id/clickable_dark_mode_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="@dimen/settings_vertical_padding">
+                style="@style/SettingsLinearStyle">
 
                 <TextView
                     style="@style/SettingsTextStyle"
@@ -75,14 +68,7 @@
 
             <LinearLayout
                 android:id="@+id/clickable_share_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="@dimen/settings_vertical_padding"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
+                style="@style/SettingsLinearStyle">
 
                 <TextView
                     style="@style/SettingsTextStyle"
@@ -95,21 +81,13 @@
                     android:src="@drawable/ic_share_24"
                     android:paddingStart="@dimen/zero"
                     android:paddingEnd="@dimen/settings_button_end_padding"
-                    android:contentDescription="@string/share_app"
                     app:tint="@color/gray" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/clickable_support_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="@dimen/settings_vertical_padding"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
+                style="@style/SettingsLinearStyle">
 
                 <TextView
                     style="@style/SettingsTextStyle"
@@ -128,14 +106,7 @@
 
             <LinearLayout
                 android:id="@+id/clickable_agreement_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="@dimen/settings_vertical_padding"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
+                style="@style/SettingsLinearStyle">
 
                 <TextView
                     style="@style/SettingsTextStyle"
