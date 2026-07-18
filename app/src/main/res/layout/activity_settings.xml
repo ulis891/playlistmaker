@@ -61,15 +61,8 @@
                 android:paddingVertical="@dimen/settings_vertical_padding">
 
                 <TextView
-                    android:layout_width="@dimen/zero"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="@dimen/settings_horizontal_margin"
-                    android:layout_marginEnd="@dimen/settings_button_end_margin"
-                    android:text="@string/dark_mode"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/button_text_size"
-                    android:fontFamily="@font/yandex_sans_display_regular"/>
+                    style="@style/SettingsTextStyle"
+                    android:text="@string/dark_mode" />
 
                 <Switch
                     android:id="@+id/switch_dark_mode"
@@ -92,15 +85,9 @@
                 android:focusable="true">
 
                 <TextView
-                    android:layout_width="@dimen/zero"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="@dimen/settings_horizontal_margin"
-                    android:layout_marginEnd="@dimen/settings_button_end_margin"
+                    style="@style/SettingsTextStyle"
                     android:text="@string/share_app"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/button_text_size"
-                    android:fontFamily="@font/yandex_sans_display_regular"/>
+                    />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -125,15 +112,8 @@
                 android:focusable="true">
 
                 <TextView
-                    android:layout_width="@dimen/zero"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="@dimen/settings_horizontal_margin"
-                    android:layout_marginEnd="@dimen/settings_button_end_margin"
-                    android:text="@string/write_support"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/button_text_size"
-                    android:fontFamily="@font/yandex_sans_display_regular" />
+                    style="@style/SettingsTextStyle"
+                    android:text="@string/write_support"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -158,15 +138,8 @@
                 android:focusable="true">
 
                 <TextView
-                    android:layout_width="@dimen/zero"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="@dimen/settings_horizontal_margin"
-                    android:layout_marginEnd="@dimen/settings_button_end_margin"
-                    android:text="@string/agreement"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/button_text_size"
-                    android:fontFamily="@font/yandex_sans_display_regular" />
+                    style="@style/SettingsTextStyle"
+                    android:text="@string/agreement"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
