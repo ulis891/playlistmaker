@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tittle_text_size">22sp</dimen>
+    <dimen name="bottom_text_size">16sp</dimen>
+    <dimen name="settings_vertical_padding">21dp</dimen>
+    <dimen name="settings_horizontal_padding">16dp</dimen>
+    <dimen name="settings_bottom_start_padding">50dp</dimen>
+    <dimen name="settings_bottom_end_padding">12dp</dimen>
+    <dimen name="zero">0dp</dimen>
+</resources>
