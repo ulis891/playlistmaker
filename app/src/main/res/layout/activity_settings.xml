@@ -76,12 +76,8 @@
                     />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_share_24"
-                    android:paddingStart="@dimen/zero"
-                    android:paddingEnd="@dimen/settings_button_end_padding"
-                    app:tint="@color/gray" />
+                    style="@style/SettingsIconStyle"
+                    android:src="@drawable/ic_share_24"/>
 
             </LinearLayout>
 
@@ -94,13 +90,8 @@
                     android:text="@string/write_support"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_support_24"
-                    android:paddingStart="@dimen/zero"
-                    android:paddingEnd="@dimen/settings_button_end_padding"
-                    android:contentDescription="@string/share_app"
-                    app:tint="@color/gray" />
+                    style="@style/SettingsIconStyle"
+                    android:src="@drawable/ic_support_24"/>
 
             </LinearLayout>
 
@@ -113,13 +104,8 @@
                     android:text="@string/agreement"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_arrow_forward_simple_24"
-                    android:paddingStart="@dimen/zero"
-                    android:paddingEnd="@dimen/settings_button_end_padding"
-                    android:contentDescription="@string/share_app"
-                    app:tint="@color/gray" />
+                    style="@style/SettingsIconStyle"
+                    android:src="@drawable/ic_arrow_forward_simple_24"/>
 
             </LinearLayout>
         </LinearLayout>
