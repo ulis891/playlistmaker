@@ -8,4 +8,6 @@
     <string name="write_support">Написать в поддержку</string>
     <string name="agreement">Пользовательское соглашение</string>
     <string name="go_back">Вернуться назад</string>
+    <string name="url_practicum">https://practicum.yandex.ru/android-developer/</string>
+    <string name="share_apk_title">Поделиться приложением</string>
 </resources>
