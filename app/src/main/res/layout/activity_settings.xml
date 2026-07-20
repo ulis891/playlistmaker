@@ -19,7 +19,7 @@
             android:layout_marginBottom="24dp">
 
             <ImageView
-                style="@style/SettingsBackIconStyle."
+                style="@style/SettingsBackIconStyle"
                 android:id="@+id/back_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

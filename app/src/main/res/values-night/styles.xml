@@ -41,7 +41,7 @@
         <item name="android:paddingEnd">@dimen/settings_button_end_padding</item>
         <item name="tint">@color/icon_color</item>
     </style>
-    <style name="SettingsBackIconStyle.">
+    <style name="SettingsBackIconStyle">
         <item name="tint">@color/white</item>
     </style>
 </resources>
