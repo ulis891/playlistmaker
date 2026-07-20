@@ -1,6 +1,7 @@
 package com.practicum.playlistmaker
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -24,13 +25,23 @@ class SettingsActivity : AppCompatActivity() {
         backArrow.setOnClickListener{ finish() }
 
         val buttonShare = findViewById<LinearLayout>(R.id.clickable_share_row)
-
         buttonShare.setOnClickListener {
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.url_practicum))
             startActivity(Intent.createChooser(shareIntent, getString(R.string.share_apk_title)))
+        }
+
+        val buttonSupport = findViewById<LinearLayout>(R.id.clickable_support_row)
+        buttonSupport.setOnClickListener {
+            val supportIntent = Intent()
+            supportIntent.action = Intent.ACTION_SENDTO
+            supportIntent.data = Uri.parse("mailto:")
+            supportIntent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.my_email))
+            supportIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.mail_subject))
+            supportIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.mail_text))
+            startActivity(supportIntent)
         }
 
     }
