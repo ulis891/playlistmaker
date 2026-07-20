@@ -44,5 +44,13 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(supportIntent)
         }
 
+        val buttonAgreement = findViewById<LinearLayout>(R.id.clickable_agreement_row)
+        buttonAgreement.setOnClickListener {
+            val agreementIntent = Intent()
+            agreementIntent.action = Intent.ACTION_VIEW
+            agreementIntent.data = Uri.parse(getString(R.string.url_agreement))
+            startActivity(agreementIntent)
+        }
+
     }
 }
