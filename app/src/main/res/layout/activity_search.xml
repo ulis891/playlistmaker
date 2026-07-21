@@ -55,6 +55,8 @@
                 android:drawableLeft="16dp"
                 android:drawableTint="@color/text_hint"
                 android:hint="@string/search"
+                android:fontFamily="@font/yandex_sans_display_regular"
+                android:textSize="16sp"
                 android:textColorHint="@color/text_hint"
                 android:drawableEnd="@drawable/ic_clear_16"
                 />
