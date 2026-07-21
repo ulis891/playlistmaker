@@ -7,4 +7,6 @@
     <color name="regular_background">@color/white</color>
     <color name="icon_color">@color/gray</color>
     <color name="gray">#AEAFB4</color>
+    <color name="text_input_background">#E6E8EB</color>
+    <color name="text_hint">#AEAFB4</color>
 </resources>
