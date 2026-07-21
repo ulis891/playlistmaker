@@ -7,4 +7,57 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                style="@style/SettingsBackIconStyle"
+                android:id="@+id/back_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="@dimen/zero"
+                android:contentDescription="@string/go_back"
+                android:padding="12dp"
+                android:src="@drawable/ic_arrow_back_24" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/zero"
+                android:layout_marginVertical="4dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="10dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="@dimen/zero"
+                android:text="@string/search"
+                android:fontFamily="@font/ys_display_medium"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/tittle_text_size"/>
+        </LinearLayout>
+            <EditText
+                android:id="@+id/search_text_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                app:cornerRadius="16dp"
+                android:background="@drawable/rounded_edit_text"
+                android:inputType="text"
+                android:drawableStart="@drawable/ic_search_icon_16"
+                android:drawablePadding="8dp"
+                android:drawableLeft="16dp"
+                android:drawableTint="@color/text_hint"
+                android:hint="@string/search"
+                android:textColorHint="@color/text_hint"
+                android:drawableEnd="@drawable/ic_clear_16"
+                />
+        </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
