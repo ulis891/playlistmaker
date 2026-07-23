@@ -51,6 +51,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
                 android:maxLines="1"
+                android:focusable="true"
                 android:autofillHints=""
                 app:cornerRadius="16dp"
                 android:background="@drawable/rounded_edit_text"
