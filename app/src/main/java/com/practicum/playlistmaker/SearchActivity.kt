@@ -1,5 +1,7 @@
 package com.practicum.playlistmaker
 
+import android.view.inputmethod.InputMethodManager
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -31,6 +33,9 @@ class SearchActivity : AppCompatActivity() {
         val clearButton = findViewById<ImageButton>(R.id.button_clear)
         clearButton.setOnClickListener {
             editText.text.clear()
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            inputMethodManager?.hideSoftInputFromWindow(editText.windowToken, 0)
+
         }
 
         editText.addTextChangedListener(object : TextWatcher {
