@@ -17,7 +17,7 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var editText: EditText
     private var currentText: String = ""
-    private val KEY_SEARCH_TEXT = "KEY_SEARCH_TEXT"
+    private val keySearchText = "KEY_SEARCH_TEXT"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class SearchActivity : AppCompatActivity() {
             inputMethodManager?.hideSoftInputFromWindow(editText.windowToken, 0)
         }
 
-        editText = findViewById<EditText>(R.id.search_text_input)
+        editText = findViewById(R.id.search_text_input)
         editText.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(p0: Editable?) {
@@ -62,12 +62,12 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(KEY_SEARCH_TEXT, currentText)
+        outState.putString(keySearchText, currentText)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        currentText = savedInstanceState.getString(KEY_SEARCH_TEXT, "")
+        currentText = savedInstanceState.getString(keySearchText, "")
         editText.setText(currentText)
         if (currentText.isNotEmpty()) {
             editText.setSelection(currentText.length)
