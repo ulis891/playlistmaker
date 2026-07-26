@@ -16,8 +16,11 @@ import androidx.core.view.WindowInsetsCompat
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var editText: EditText
-    private var currentText: String = ""
-    private val keySearchText = "KEY_SEARCH_TEXT"
+    companion object {
+        const val KEY_SEARCH_TEXT = "KEY_SEARCH_TEXT"
+        const val EMPTY_TEXT = ""
+    }
+    private var currentText: String = EMPTY_TEXT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,12 +65,12 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(keySearchText, currentText)
+        outState.putString(KEY_SEARCH_TEXT, currentText)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        currentText = savedInstanceState.getString(keySearchText, "")
+        currentText = savedInstanceState.getString(KEY_SEARCH_TEXT, EMPTY_TEXT)
         editText.setText(currentText)
         if (currentText.isNotEmpty()) {
             editText.setSelection(currentText.length)
