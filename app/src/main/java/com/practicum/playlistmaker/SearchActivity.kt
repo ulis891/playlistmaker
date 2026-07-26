@@ -15,6 +15,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class SearchActivity : AppCompatActivity() {
+
+    private lateinit var editText: EditText
+    private var currentText: String = ""
+    private val KEY_SEARCH_TEXT = "KEY_SEARCH_TEXT"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,19 +33,18 @@ class SearchActivity : AppCompatActivity() {
         val backArrow = findViewById<ImageView>(R.id.back_arrow)
         backArrow.setOnClickListener{ finish() }
 
-        val editText = findViewById<EditText>(R.id.search_text_input)
-
         val clearButton = findViewById<ImageButton>(R.id.button_clear)
         clearButton.setOnClickListener {
             editText.text.clear()
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             inputMethodManager?.hideSoftInputFromWindow(editText.windowToken, 0)
-
         }
 
+        editText = findViewById<EditText>(R.id.search_text_input)
         editText.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(p0: Editable?) {
+                currentText = p0.toString()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int ) {
@@ -53,10 +57,21 @@ class SearchActivity : AppCompatActivity() {
                    else{
                        clearButton.visibility = View.GONE
                }
-
-
             }
         })
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_SEARCH_TEXT, currentText)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        currentText = savedInstanceState.getString(KEY_SEARCH_TEXT, "")
+        editText.setText(currentText)
+        if (currentText.isNotEmpty()) {
+            editText.setSelection(currentText.length)
+        }
+    }
 }
