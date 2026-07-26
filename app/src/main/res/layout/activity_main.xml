@@ -39,24 +39,18 @@
         <Button
             android:id="@+id/button_search"
             style="@style/MainButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:text="@string/search"
             app:icon="@drawable/ic_magnifier_24"/>
 
         <Button
             android:id="@+id/button_media"
             style="@style/MainButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:text="@string/media"
             app:icon="@drawable/ic_media_24"/>
 
         <Button
             android:id="@+id/button_settings"
             style="@style/MainButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:text="@string/settings"
             app:icon="@drawable/ic_settings_24"/>
 
