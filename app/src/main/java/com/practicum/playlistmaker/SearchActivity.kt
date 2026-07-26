@@ -2,8 +2,6 @@ package com.practicum.playlistmaker
 
 import android.view.inputmethod.InputMethodManager
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -12,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.addTextChangedListener
 
 class SearchActivity : AppCompatActivity() {
 
@@ -43,24 +42,14 @@ class SearchActivity : AppCompatActivity() {
         }
 
         editText = findViewById(R.id.search_text_input)
-        editText.addTextChangedListener(object : TextWatcher {
 
-            override fun afterTextChanged(p0: Editable?) {
-                currentText = p0.toString()
-            }
+        editText.addTextChangedListener(
+            onTextChanged  = { text, _, _, _ ->
+                clearButton.visibility = if (text.isNullOrEmpty()) View.GONE else View.VISIBLE
+            },
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int ) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-               if (!s.isNullOrEmpty()){
-                   clearButton.visibility = View.VISIBLE
-               }
-                   else{
-                       clearButton.visibility = View.GONE
-               }
-            }
-        })
+            afterTextChanged = { editable ->  currentText = editable?.toString() ?: ""}
+        )
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
