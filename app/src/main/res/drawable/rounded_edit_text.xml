@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Цвет фона -->
+    <solid android:color="@color/text_input_background" />
+
+    <!-- Скругление углов -->
+    <corners android:radius="8dp" />
+
+    <!-- Отступы -->
+    <padding
+        android:left="12dp"
+        android:top="12dp"
+        android:right="16dp"
+        android:bottom="12dp" />
+</shape>
