@@ -79,6 +79,14 @@
                 android:src="@drawable/ic_clear_16"
                 android:visibility="gone" />
             </FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/rvTracks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:listitem="@layout/view_track"
+            tools:itemCount="10"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
