@@ -28,7 +28,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:paddingBottom="1dp"
-            tools:text="SongName"/>
+            tools:text="@string/song_name_placeholder"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:layout_weight="1"
                 android:maxLines="1"
                 android:ellipsize="end"
-                tools:text="ArtistName"/>
+                tools:text="@string/artist_name_placeholder"/>
             <ImageView
                 android:id="@+id/dotSeparator"
                 android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
                 android:id="@+id/tvSongDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="5:55"/>
+                tools:text="@string/song_time_placeholder"/>
         </LinearLayout>
     </LinearLayout>
 
