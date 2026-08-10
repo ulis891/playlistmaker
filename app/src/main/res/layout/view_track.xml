@@ -25,6 +25,8 @@
             android:id="@+id/tvSongName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:paddingBottom="1dp"
             tools:text="SongName"/>
         <LinearLayout
@@ -35,6 +37,8 @@
                 android:id="@+id/tvArtistName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
                 tools:text="ArtistName"/>
             <ImageView
                 android:id="@+id/dotSeparator"
