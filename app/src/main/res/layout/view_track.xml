@@ -22,18 +22,15 @@
         android:layout_marginHorizontal="8dp"
         android:gravity="center_vertical">
         <TextView
+            style="@style/SongNameStyle"
             android:id="@+id/tvSongName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:paddingBottom="1dp"
             tools:text="@string/song_name_placeholder"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                style="@style/SongInfoStyle"
                 android:id="@+id/tvArtistName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -42,12 +39,14 @@
                 android:ellipsize="end"
                 tools:text="@string/artist_name_placeholder"/>
             <ImageView
+                style="@style/SongInfoStyle"
                 android:id="@+id/dotSeparator"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_dot_separator_13"/>
             <TextView
+                style="@style/SongInfoStyle"
                 android:id="@+id/tvSongDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -85,8 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:listitem="@layout/view_track"
-            tools:itemCount="10"/>
+            tools:listitem="@layout/view_track"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

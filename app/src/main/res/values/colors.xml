@@ -10,5 +10,6 @@
     <color name="icon_color">@color/gray</color>
     <color name="text_input_background">#E6E8EB</color>
     <color name="text_input_color">@color/black</color>
-    <color name="text_hint">#AEAFB4</color>
+    <color name="text_hint">@color/gray</color>
+    <color name="second_text">@color/gray</color>
 </resources>
