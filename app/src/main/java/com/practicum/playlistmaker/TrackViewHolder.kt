@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val rootLayout: LinearLayout = itemView.findViewById(R.id.rootLayout)
@@ -20,7 +21,13 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val duration = track.trackTime
         val albumArt = track.artworkUrl100
 
-        Glide.with(itemView.context).load(albumArt).into(ivTrackCover)
+        Glide.with(itemView)
+            .load(albumArt)
+            .centerCrop()
+            .transform(RoundedCorners(2))
+            .placeholder(R.drawable.album_image_placeholder_45)
+            .error(R.drawable.album_image_placeholder_45)
+            .into(ivTrackCover)
         tvTrackName.text = trackName
         tvArtistName.text = artistName
         tvDuration.text = duration
