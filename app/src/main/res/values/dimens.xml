@@ -2,6 +2,7 @@
 <resources>
     <dimen name="tittle_text_size">22sp</dimen>
     <dimen name="button_text_size">16sp</dimen>
+    <dimen name="second_text_size">11sp</dimen>
     <dimen name="settings_vertical_padding">21dp</dimen>
     <dimen name="settings_horizontal_margin">16dp</dimen>
     <dimen name="settings_button_end_margin">50dp</dimen>
