@@ -65,6 +65,8 @@
                 android:textSize="16sp"
                 android:textColor="@color/text_input_color"
                 android:textColorHint="@color/text_hint"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
                 />
 
             <ImageButton
@@ -79,14 +81,15 @@
                 android:src="@drawable/ic_clear_16"
                 android:visibility="gone" />
             </FrameLayout>
+
         <androidx.recyclerview.widget.RecyclerView
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:id="@+id/rvTracks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginTop="16dp"
-            tools:listitem="@layout/view_track"/>
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/view_track" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
