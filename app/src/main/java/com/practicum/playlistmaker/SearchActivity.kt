@@ -13,6 +13,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchActivity : AppCompatActivity() {
 
@@ -23,6 +28,13 @@ class SearchActivity : AppCompatActivity() {
         const val EMPTY_TEXT = ""
     }
 
+    private val iTunesBaseURL = "https://itunes.apple.com/"
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(iTunesBaseURL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private val iTunesService = retrofit.create(iTunesAPI:: class.java)
     private var currentText: String = EMPTY_TEXT
 
     override fun onCreate(savedInstanceState: Bundle?) {
