@@ -28,6 +28,11 @@ class SearchActivity : AppCompatActivity() {
         const val EMPTY_TEXT = ""
     }
 
+    val trackList = ArrayList<Track>()
+    private lateinit var backArrow :ImageView
+    private lateinit var clearButton:ImageButton
+    private lateinit var rvTracks :RecyclerView
+
     private val iTunesBaseURL = "https://itunes.apple.com/"
     private val retrofit = Retrofit.Builder()
         .baseUrl(iTunesBaseURL)
@@ -36,6 +41,8 @@ class SearchActivity : AppCompatActivity() {
 
     private val iTunesService = retrofit.create(iTunesAPI:: class.java)
     private var currentText: String = EMPTY_TEXT
+
+    val tracksAdapter = TrackAdapter(trackList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,15 +54,19 @@ class SearchActivity : AppCompatActivity() {
             insets
         }
 
-        val backArrow = findViewById<ImageView>(R.id.back_arrow)
+        backArrow = findViewById(R.id.back_arrow)
         backArrow.setOnClickListener { finish() }
 
-        val clearButton = findViewById<ImageButton>(R.id.button_clear)
+        clearButton = findViewById(R.id.button_clear)
         clearButton.setOnClickListener {
             editText.text.clear()
             val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
             inputMethodManager?.hideSoftInputFromWindow(editText.windowToken, 0)
         }
+
+        rvTracks = findViewById(R.id.rvTracks)
+        rvTracks.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        rvTracks.adapter = tracksAdapter
 
         editText = findViewById(R.id.search_text_input)
 
