@@ -66,6 +66,8 @@ class SearchActivity : AppCompatActivity() {
         clearButton = findViewById(R.id.button_clear)
         clearButton.setOnClickListener {
             editText.text.clear()
+            trackList.clear()
+            tracksAdapter.notifyDataSetChanged()
             val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
             inputMethodManager?.hideSoftInputFromWindow(editText.windowToken, 0)
         }
