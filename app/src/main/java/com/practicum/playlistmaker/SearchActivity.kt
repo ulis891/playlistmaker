@@ -4,9 +4,11 @@ import android.view.inputmethod.InputMethodManager
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -32,6 +34,9 @@ class SearchActivity : AppCompatActivity() {
     val trackList = ArrayList<Track>()
     private lateinit var backArrow :ImageView
     private lateinit var clearButton:ImageButton
+    private lateinit var problemsIconPlaceholder: ImageView
+    private lateinit var problemsTextPlaceholder: TextView
+    private lateinit var problemsButtonPlaceholder: Button
     private lateinit var rvTracks :RecyclerView
 
     private val iTunesBaseURL = "https://itunes.apple.com/"
@@ -64,6 +69,10 @@ class SearchActivity : AppCompatActivity() {
             val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
             inputMethodManager?.hideSoftInputFromWindow(editText.windowToken, 0)
         }
+
+        problemsIconPlaceholder = findViewById(R.id.problem_icon)
+        problemsTextPlaceholder = findViewById(R.id.problem_text)
+        problemsButtonPlaceholder= findViewById(R.id.problem_button)
 
         rvTracks = findViewById(R.id.rvTracks)
         rvTracks.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
@@ -101,6 +110,28 @@ class SearchActivity : AppCompatActivity() {
             }
             false
         }
+    }
+
+    private fun showMessage(message: String) {
+        trackList.clear()
+        tracksAdapter.notifyDataSetChanged()
+        if (message.isEmpty()){
+            problemsIconPlaceholder.setImageResource(R.drawable.ic_nothing_result_placeholder_120)
+            problemsTextPlaceholder.text = getString(R.string.nothing_result_placeholder)
+        }
+        else{
+            problemsIconPlaceholder.setImageResource(R.drawable.ic_connection_problem_120)
+            problemsTextPlaceholder.text = getString(R.string.something_went_wrong_placeholder)
+            problemsButtonPlaceholder.visibility = View.VISIBLE
+        }
+        problemsIconPlaceholder.visibility = View.VISIBLE
+        problemsTextPlaceholder.visibility = View.VISIBLE
+    }
+
+    private fun goneProblemsPlaceholders() {
+        problemsIconPlaceholder.visibility = View.GONE
+        problemsTextPlaceholder.visibility = View.GONE
+        problemsButtonPlaceholder.visibility = View.GONE
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
