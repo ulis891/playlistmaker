@@ -18,4 +18,5 @@
     <string name="song_name_placeholder">SongName</string>
     <string name="artist_name_placeholder">ArtistName</string>
     <string name="song_time_placeholder">5:55</string>
+    <string name="nothing_result_placeholder">Ничего не нашлось</string>
 </resources>
