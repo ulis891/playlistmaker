@@ -40,7 +40,7 @@ class SearchActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val iTunesService = retrofit.create(iTunesAPI:: class.java)
+    private val iTunesService = retrofit.create(ITunesAPI:: class.java)
     private var currentText: String = EMPTY_TEXT
 
     val tracksAdapter = TrackAdapter(trackList)
