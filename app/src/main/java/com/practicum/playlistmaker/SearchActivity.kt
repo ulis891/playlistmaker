@@ -78,8 +78,35 @@ class SearchActivity : AppCompatActivity() {
         rvTracks.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvTracks.adapter = tracksAdapter
 
-        editText = findViewById(R.id.search_text_input)
+        val tracksSearch: (String) -> Unit = { requestText ->
+            iTunesService.getSongs(requestText)
+                .enqueue(object : Callback<TracksResponse> {
+                    override fun onResponse(
+                        call: Call<TracksResponse>,
+                        response: Response<TracksResponse>
+                    ) {
+                        if (response.code() == 200) {
+                            trackList.clear()
+                            if (response.body()?.results?.isNotEmpty() == true) {
+                                goneProblemsPlaceholders()
+                                trackList.addAll(response.body()?.results!!)
+                            }
+                            if (trackList.isEmpty()) {
+                                showMessage("")
+                            } else {
+                                tracksAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    }
 
+                    override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
+                        showMessage(getString(R.string.something_went_wrong_placeholder))
+                    }
+            }   )
+        }
+
+
+        editText = findViewById(R.id.search_text_input)
         editText.addTextChangedListener(
             onTextChanged = { text, _, _, _ ->
                 clearButton.visibility = if (text.isNullOrEmpty()) View.GONE else View.VISIBLE
@@ -87,28 +114,20 @@ class SearchActivity : AppCompatActivity() {
 
             afterTextChanged = { editable -> currentText = editable?.toString() ?: "" }
         )
-
         editText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (editText.text.isNotEmpty()){
-                    iTunesService.getSongs(editText.text.toString()).enqueue(object : Callback<TracksResponse> {
-                        override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
-                            if (response.code() == 200) {
-                                trackList.clear()
-                                if (response.body()?.results?.isNotEmpty() == true) {
-                                    trackList.addAll(response.body()?.results!!)
-                                }
-                                tracksAdapter.notifyDataSetChanged()
-                            }
-                        }
-
-                        override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
-                            t.printStackTrace()
-                        }
-                    })
+                    currentText = editText.text.toString()
+                    tracksSearch(currentText)
                 }
             }
             false
+        }
+
+        problemsButtonPlaceholder.setOnClickListener {
+            if (currentText.isNotEmpty()) {
+                tracksSearch(currentText)
+            }
         }
     }
 
