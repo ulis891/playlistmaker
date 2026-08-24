@@ -12,4 +12,6 @@
     <color name="text_input_color">@color/black</color>
     <color name="text_hint">@color/black</color>
     <color name="second_text">@color/white</color>
+    <color name="button_text">@color/black</color>
+    <color name="button_color">@color/white</color>
 </resources>
