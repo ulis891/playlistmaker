@@ -19,4 +19,7 @@
     <string name="artist_name_placeholder">ArtistName</string>
     <string name="song_time_placeholder">5:55</string>
     <string name="nothing_result_placeholder">Ничего не нашлось</string>
+    <string name="some_text_placeholder">какой-то текст</string>
+    <string name="something_went_wrong_placeholder">Проблемы со связью.\n\nЗагрузка не удалась. Проверьте подключение к интернету</string>
+    <string name="update">Обновить</string>
 </resources>
