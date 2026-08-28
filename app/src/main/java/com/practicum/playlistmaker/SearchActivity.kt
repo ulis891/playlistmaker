@@ -89,9 +89,10 @@ class SearchActivity : AppCompatActivity() {
                     ) {
                         if (response.isSuccessful) {
                             trackList.clear()
-                            if (response.body()?.results?.isNotEmpty() == true) {
+                            val responseBody = response.body()?.results
+                            if (responseBody?.isNotEmpty() ?: false) {
                                 goneProblemsPlaceholders()
-                                trackList.addAll(response.body()?.results!!)
+                                trackList.addAll(responseBody)
                             }
                             if (trackList.isEmpty()) {
                                 showMessage("")
