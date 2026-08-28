@@ -31,7 +31,7 @@ class SearchActivity : AppCompatActivity() {
         const val EMPTY_TEXT = ""
     }
 
-    val trackList = ArrayList<Track>()
+    val trackList = mutableListOf<Track>()
     private lateinit var backArrow :ImageView
     private lateinit var clearButton:ImageButton
     private lateinit var problemsIconPlaceholder: ImageView
