@@ -19,6 +19,8 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val tvArtistName: TextView = itemView.findViewById(R.id.tvArtistName)
     private val tvDuration: TextView = itemView.findViewById(R.id.tvSongDuration)
 
+    private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
+
     fun dpToPx(dp: Float, context: Context): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -43,6 +45,6 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             .into(ivTrackCover)
         tvTrackName.text = trackName
         tvArtistName.text = artistName
-        tvDuration.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(duration)
+        tvDuration.text = dateFormat.format(duration)
     }
 }
