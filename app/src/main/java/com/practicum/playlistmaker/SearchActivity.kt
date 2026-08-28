@@ -87,7 +87,7 @@ class SearchActivity : AppCompatActivity() {
                         call: Call<TracksResponse>,
                         response: Response<TracksResponse>
                     ) {
-                        if (response.code() == 200) {
+                        if (response.isSuccessful) {
                             trackList.clear()
                             if (response.body()?.results?.isNotEmpty() == true) {
                                 goneProblemsPlaceholders()
