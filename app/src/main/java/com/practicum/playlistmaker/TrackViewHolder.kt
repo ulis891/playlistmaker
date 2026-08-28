@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val rootLayout: LinearLayout = itemView.findViewById(R.id.rootLayout)
@@ -16,6 +18,8 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val tvTrackName: TextView = itemView.findViewById(R.id.tvSongName)
     private val tvArtistName: TextView = itemView.findViewById(R.id.tvArtistName)
     private val tvDuration: TextView = itemView.findViewById(R.id.tvSongDuration)
+
+    private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
 
     fun dpToPx(dp: Float, context: Context): Int {
         return TypedValue.applyDimension(
@@ -41,6 +45,6 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             .into(ivTrackCover)
         tvTrackName.text = trackName
         tvArtistName.text = artistName
-        tvDuration.text = duration
+        tvDuration.text = dateFormat.format(duration)
     }
 }
