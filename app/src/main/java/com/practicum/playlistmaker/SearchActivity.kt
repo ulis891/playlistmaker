@@ -39,6 +39,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var problemsButtonPlaceholder: Button
     private lateinit var rvTracks :RecyclerView
 
+    private lateinit var tracksAdapter: TrackAdapter
     private val iTunesBaseURL = "https://itunes.apple.com/"
     private val retrofit = Retrofit.Builder()
         .baseUrl(iTunesBaseURL)
