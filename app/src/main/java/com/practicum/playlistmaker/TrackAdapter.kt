@@ -22,8 +22,4 @@ class TrackAdapter(
         override fun getItemCount(): Int {
             return trackList.size
         }
-
-        fun isNotEmpty(): Boolean {
-            return trackList.isNotEmpty()
-        }
     }
