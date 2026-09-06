@@ -90,7 +90,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,8 +100,7 @@
                     android:text="@string/History_header"
                     android:fontFamily="@font/ys_display_medium"
                     android:textColor="@color/black"
-                    android:textSize="19sp"
-                    android:visibility="gone"/>
+                    android:textSize="19sp"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvHistoryTracks"
                     android:layout_width="match_parent"
@@ -108,14 +108,12 @@
                     android:layout_marginTop="16dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/view_track"
-                    android:visibility="gone"/>
+                    tools:listitem="@layout/view_track"/>
                 <Button
                     android:id="@+id/clear_history_button"
                     android:layout_marginTop="24dp"
                     style="@style/SearchButtonStyle"
-                    android:text="Очистить историю"
-                    android:visibility="gone"/>
+                    android:text="@string/clean_history"/>
             </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvTracks"
