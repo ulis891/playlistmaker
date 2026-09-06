@@ -48,8 +48,6 @@ class SearchActivity : AppCompatActivity() {
     private val iTunesService = retrofit.create(ITunesAPI:: class.java)
     private var currentText: String = EMPTY_TEXT
 
-    val tracksAdapter = TrackAdapter(trackList)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -59,6 +57,8 @@ class SearchActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val tracksAdapter = TrackAdapter(trackList)
 
         backArrow = findViewById(R.id.back_arrow)
         backArrow.setOnClickListener { finish() }
