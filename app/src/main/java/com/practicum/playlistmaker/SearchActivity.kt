@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +39,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var problemsTextPlaceholder: TextView
     private lateinit var problemsButtonPlaceholder: Button
     private lateinit var rvTracks :RecyclerView
-
+    private lateinit var rvTrackHistory: LinearLayout
     private lateinit var tracksAdapter: TrackAdapter
     private val iTunesBaseURL = "https://itunes.apple.com/"
     private val retrofit = Retrofit.Builder()
@@ -76,6 +77,8 @@ class SearchActivity : AppCompatActivity() {
         problemsIconPlaceholder = findViewById(R.id.problem_icon)
         problemsTextPlaceholder = findViewById(R.id.problem_text)
         problemsButtonPlaceholder= findViewById(R.id.problem_button)
+
+        rvTrackHistory = findViewById(R.id.history_view)
 
         rvTracks = findViewById(R.id.rvTracks)
         rvTracks.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
