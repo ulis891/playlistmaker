@@ -11,6 +11,8 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
         private const val MAX_HISTORY_SIZE = 10
     }
 
+    private val gson = Gson()
+
     fun addTrack(track: Track) {
         val tracks = readTrackList().toMutableList()
         tracks.removeIf { it.trackId == track.trackId }
@@ -24,7 +26,7 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
 
     fun readTrackList(): List<Track> {
         val json = sharedPreferences.getString(KEY_TRACK_LIST, null) ?: return emptyList()
-        return Gson().fromJson(json, Array<Track>::class.java).toList()
+        return gson.fromJson(json, Array<Track>::class.java).toList()
     }
 
     fun clearTrackList() {
@@ -34,7 +36,7 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
     }
 
     private fun saveTrackList(tracks: List<Track>) {
-        val json = Gson().toJson(tracks)
+        val json = gson.toJson(tracks)
         sharedPreferences.edit {
             putString(KEY_TRACK_LIST, json)
         }
