@@ -18,7 +18,6 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val tvTrackName: TextView = itemView.findViewById(R.id.tvSongName)
     private val tvArtistName: TextView = itemView.findViewById(R.id.tvArtistName)
     private val tvDuration: TextView = itemView.findViewById(R.id.tvSongDuration)
-
     private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
 
     fun dpToPx(dp: Float, context: Context): Int {
@@ -29,6 +28,7 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     }
 
     fun bind(track: Track) {
+        val trackId = track.trackId
         val trackName = track.trackName
         val artistName = track.artistName
         val duration = track.trackTime
