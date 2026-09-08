@@ -148,17 +148,21 @@ class SearchActivity : AppCompatActivity() {
             }   )
         }
 
+        fun showHistory(history: List<Track>){
+            historyTrackList.clear()
+            historyTrackList.addAll(history)
+            tracksHistoryAdapter.notifyDataSetChanged()
+            rvTrackHistory.visibility = View.VISIBLE
+            rvTracks.visibility = View.GONE
+            goneProblemsPlaceholders()
+        }
+
 
         editText = findViewById(R.id.search_text_input)
         editText.setOnFocusChangeListener { _, hasFocus ->
             val history = searchHistory.readTrackList()
             if (hasFocus && editText.text.isEmpty() && history.isNotEmpty()) {
-                historyTrackList.clear()
-                historyTrackList.addAll(history)
-                tracksHistoryAdapter.notifyDataSetChanged()
-                rvTrackHistory.visibility = View.VISIBLE
-                rvTracks.visibility = View.GONE
-                goneProblemsPlaceholders()
+                showHistory(history)
             } else {
                 rvTrackHistory.visibility = View.GONE
             }
@@ -171,12 +175,7 @@ class SearchActivity : AppCompatActivity() {
 
                 val history = searchHistory.readTrackList()
                 if (editText.hasFocus() && text?.isEmpty() == true && history.isNotEmpty()) {
-                    historyTrackList.clear()
-                    historyTrackList.addAll(history)
-                    tracksHistoryAdapter.notifyDataSetChanged()
-                    rvTrackHistory.visibility = View.VISIBLE
-                    rvTracks.visibility = View.GONE
-                    goneProblemsPlaceholders()
+                    showHistory(history)
                 } else {
                     rvTrackHistory.visibility = View.GONE
                 }
