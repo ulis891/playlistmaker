@@ -22,6 +22,6 @@
     <string name="some_text_placeholder">какой-то текст</string>
     <string name="something_went_wrong_placeholder">Проблемы со связью.\n\nЗагрузка не удалась. Проверьте подключение к интернету</string>
     <string name="update">Обновить</string>
-    <string name="History_header">Вы искали</string>
+    <string name="history_header">Вы искали</string>
     <string name="clean_history">Очистить историю</string>
 </resources>
