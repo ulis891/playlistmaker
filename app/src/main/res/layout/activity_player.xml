@@ -32,5 +32,17 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="24dp"/>
 
+    <ImageView
+        android:id="@+id/ivAlbumCover"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/albumcover_content_description"
+        app:layout_constraintTop_toBottomOf="@id/back_arrow"
+        app:layout_constraintStart_toEndOf="@id/left_guideline"
+        app:layout_constraintEnd_toStartOf="@id/right_guideline"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/album_placeholder"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
