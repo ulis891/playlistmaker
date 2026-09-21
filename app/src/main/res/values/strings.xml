@@ -24,4 +24,5 @@
     <string name="update">Обновить</string>
     <string name="history_header">Вы искали</string>
     <string name="clean_history">Очистить историю</string>
+    <string name="albumcover_content_description">AlbumCover</string>
 </resources>
