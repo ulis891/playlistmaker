@@ -37,7 +37,7 @@
         android:id="@+id/ivAlbumCover"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/albumcover_content_description"
+        android:contentDescription="@string/album_cover_content_description"
         app:layout_constraintTop_toBottomOf="@id/back_arrow"
         app:layout_constraintStart_toEndOf="@id/left_guideline_24"
         app:layout_constraintEnd_toStartOf="@id/right_guideline_24"
@@ -129,8 +129,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvPlayTime"
         app:layout_constraintStart_toEndOf="@id/left_guideline_16"
         app:layout_constraintEnd_toStartOf="@id/tvDurationValue"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        tools:text="@string/song_name_placeholder"/>
+        android:text="@string/duration"/>
 
     <TextView
         android:id="@+id/tvDurationValue"
@@ -140,7 +139,7 @@
         app:layout_constraintStart_toEndOf="@id/tvDurationLabel"
         app:layout_constraintTop_toBottomOf="@id/tvPlayTime"
         app:layout_constraintBaseline_toBaselineOf="@id/tvDurationLabel"
-        tools:text="@string/song_name_placeholder" />
+        tools:text="@string/song_time_placeholder" />
 
     <TextView
         android:id="@+id/tvAlbumLabel"
@@ -150,8 +149,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvDurationLabel"
         app:layout_constraintStart_toEndOf="@id/left_guideline_16"
         app:layout_constraintEnd_toStartOf="@id/tvAlbumValue"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        tools:text="@string/song_name_placeholder"/>
+        android:text="@string/album"/>
 
     <TextView
         style="@style/InfoRowValue"
@@ -171,8 +169,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvAlbumLabel"
         app:layout_constraintStart_toEndOf="@id/left_guideline_16"
         app:layout_constraintEnd_toStartOf="@id/tvYearValue"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        tools:text="@string/song_name_placeholder"/>
+        android:text="@string/year"/>
 
     <TextView
         android:id="@+id/tvYearValue"
@@ -191,8 +188,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvYearLabel"
         app:layout_constraintStart_toEndOf="@id/left_guideline_16"
         app:layout_constraintEnd_toStartOf="@id/tvGenreValue"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        tools:text="@string/song_name_placeholder"/>
+        android:text="@string/genre"/>
 
     <TextView
         android:id="@+id/tvGenreValue"
@@ -213,8 +209,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvGenreLabel"
         app:layout_constraintStart_toEndOf="@id/left_guideline_16"
         app:layout_constraintEnd_toStartOf="@id/tvCountryValue"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        tools:text="@string/song_name_placeholder"/>
+        android:text="@string/country"/>
 
     <TextView
         android:id="@+id/tvCountryValue"
