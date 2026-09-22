@@ -84,7 +84,7 @@
         <item name="android:layout_marginBottom">8dp</item>
     </style>
     <style name="InfoRowLabel" parent="InfoRowBase">
-        <item name="android:textColor">@color/second_text</item>
+        <item name="android:textColor">@color/gray</item>
     </style>
     <style name="InfoRowValue" parent="InfoRowBase">
         <item name="android:textColor">@color/text_color</item>
