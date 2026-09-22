@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/regular_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -77,7 +78,7 @@
         app:layout_constraintEnd_toStartOf="@id/ibPlay"
         app:layout_constraintStart_toEndOf="@id/left_guideline_24"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/regular_background"
         android:src="@drawable/ic_add_playlist_button_51"/>
     <ImageButton
         android:id="@+id/ibPlay"
@@ -88,7 +89,7 @@
         app:layout_constraintStart_toEndOf="@id/ibAddToPlaylist"
         app:layout_constraintEnd_toStartOf="@id/ibAddToFavorites"
         android:src="@drawable/ic_play_button_100"
-        android:backgroundTint="@color/white"        />
+        android:backgroundTint="@color/regular_background"        />
     <ImageButton
         android:id="@+id/ibAddToFavorites"
         android:layout_width="wrap_content"
@@ -98,7 +99,7 @@
         app:layout_constraintBottom_toBottomOf="@id/ibPlay"
         app:layout_constraintEnd_toStartOf="@id/right_guideline_24"
         android:src="@drawable/ic_add_favorites_button_51"
-        android:backgroundTint="@color/white"/>
+        android:backgroundTint="@color/regular_background"        />
 
     <TextView
         android:id="@+id/tvPlayTime"
