@@ -75,4 +75,18 @@
         <item name="tint">@color/icon_color</item>
         <item name="android:textAllCaps">false</item>
     </style>
+    <style name="InfoRowBase">
+        <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/ys_display_regular</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">9dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+    <style name="InfoRowLabel" parent="InfoRowBase">
+        <item name="android:textColor">@color/second_text</item>
+    </style>
+    <style name="InfoRowValue" parent="InfoRowBase">
+        <item name="android:textColor">@color/text_color</item>
+    </style>
 </resources>
