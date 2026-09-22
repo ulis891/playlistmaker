@@ -2,6 +2,7 @@ package com.practicum.playlistmaker
 
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,7 +19,23 @@ class PlayerActivity : AppCompatActivity() {
             insets
         }
 
-        val backArrow = findViewById<ImageView>(R.id.back_arrow)
-        backArrow.setOnClickListener{ finish() }
+        findViewById<ImageView>(R.id.back_arrow).setOnClickListener { finish() }
+
+        val trackId = intent.getStringExtra("track_id")
+        val track = trackId?.let { id ->
+            (application as App).searchHistory.readTrackList().find { it.trackId == id }
+        }
+
+        track?.let { bindTrack(it) }
+    }
+
+    private fun bindTrack(track: Track) {
+        findViewById<TextView>(R.id.tvSongName).text = track.trackName
+        findViewById<TextView>(R.id.tvArtistName).text = track.artistName
+        findViewById<TextView>(R.id.tvDurationValue).text = track.trackTime.toString()
+        findViewById<TextView>(R.id.tvAlbumValue).text = track.collectionName
+        findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.toString()
+        findViewById<TextView>(R.id.tvGenreValue).text = track.primaryGenreName
+        findViewById<TextView>(R.id.tvCountryValue).text = track.country
     }
 }
