@@ -24,5 +24,10 @@
     <string name="update">Обновить</string>
     <string name="history_header">Вы искали</string>
     <string name="clean_history">Очистить историю</string>
-    <string name="albumcover_content_description">AlbumCover</string>
+    <string name="album_cover_content_description">AlbumCover</string>
+    <string name="duration">Длительность</string>
+    <string name="album">Альбом</string>
+    <string name="year">Год</string>
+    <string name="genre">Жанр</string>
+    <string name="country">Страна</string>
 </resources>
