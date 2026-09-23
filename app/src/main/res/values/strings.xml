@@ -30,4 +30,7 @@
     <string name="year">Год</string>
     <string name="genre">Жанр</string>
     <string name="country">Страна</string>
+    <string name="add_to_playlist">добавление в плейлист</string>
+    <string name="play_track">Включение трека</string>
+    <string name="add_to_favorites">Добавить в избранное</string>
 </resources>
