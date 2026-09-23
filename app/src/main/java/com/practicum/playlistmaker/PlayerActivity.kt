@@ -41,8 +41,8 @@ class PlayerActivity : AppCompatActivity() {
             .load(track.getCoverArtwork())
             .centerCrop()
             .transform(RoundedCorners(Utils.dpToPx(8f, this)))
-            .placeholder(R.drawable.album_image_placeholder_45)
-            .error(R.drawable.album_image_placeholder_45)
+            .placeholder(R.drawable.album_placeholder)
+            .error(R.drawable.album_placeholder)
             .into(findViewById(R.id.ivAlbumCover))
         findViewById<TextView>(R.id.tvSongName).text = track.trackName
         findViewById<TextView>(R.id.tvArtistName).text = track.artistName
