@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/player">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/regular_background"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <ImageView
+            style="@style/SettingsBackIconStyle"
+            android:id="@+id/back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginVertical="@dimen/back_arrow_margin"
+            android:layout_marginStart="@dimen/back_arrow_margin"
+            android:layout_marginEnd="@dimen/zero"
+            android:contentDescription="@string/go_back"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_back_24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guideline_24"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_guideline_24"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp"/>
+
+        <ImageView
+            android:id="@+id/ivAlbumCover"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/album_cover_content_description"
+            app:layout_constraintTop_toBottomOf="@id/back_arrow"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_24"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline_24"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/album_placeholder"/>
+
+        <TextView
+            android:id="@+id/tvSongName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/ivAlbumCover"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_24"
+            android:fontFamily="@font/ys_display_medium"
+            android:textSize="22sp"
+            android:textColor="@color/text_color"
+            android:text="@string/song_name_placeholder"
+            tools:text="@string/song_name_placeholder"/>
+
+        <TextView
+            android:id="@+id/tvArtistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tvSongName"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_24"
+            android:fontFamily="@font/ys_display_medium"
+            android:textSize="14sp"
+            android:textColor="@color/text_color"
+            android:text="@string/artist_name_placeholder"
+            tools:text="@string/artist_name_placeholder"/>
+
+        <ImageButton
+            android:id="@+id/ibAddToPlaylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/add_to_playlist"
+            app:layout_constraintTop_toTopOf="@id/ibPlay"
+            app:layout_constraintBottom_toBottomOf="@id/ibPlay"
+            app:layout_constraintEnd_toStartOf="@id/ibPlay"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_24"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:backgroundTint="@color/regular_background"
+            android:src="@drawable/ic_add_playlist_button_51"/>
+        <ImageButton
+            android:id="@+id/ibPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/play_track"
+            app:layout_constraintTop_toBottomOf="@id/tvArtistName"
+            app:layout_constraintStart_toEndOf="@id/ibAddToPlaylist"
+            app:layout_constraintEnd_toStartOf="@id/ibAddToFavorites"
+            android:src="@drawable/ic_play_button_100"
+            android:backgroundTint="@color/regular_background"        />
+        <ImageButton
+            android:id="@+id/ibAddToFavorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/add_to_favorites"
+            app:layout_constraintStart_toEndOf="@id/ibPlay"
+            app:layout_constraintTop_toTopOf="@id/ibPlay"
+            app:layout_constraintBottom_toBottomOf="@id/ibPlay"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline_24"
+            android:src="@drawable/ic_add_favorites_button_51"
+            android:backgroundTint="@color/regular_background"        />
+
+        <TextView
+            android:id="@+id/tvPlayTime"
+            style="@style/InfoRowValue"
+            android:fontFamily="@font/ys_display_medium"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/ibPlay"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_24"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline_24"
+            android:text="@string/song_time_placeholder"
+            tools:text="@string/song_time_placeholder"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guideline_16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_guideline_16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp"/>
+
+        <TextView
+            android:id="@+id/tvDurationLabel"
+            style="@style/InfoRowLabel"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintBottom_toTopOf="@id/tvAlbumLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvPlayTime"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_16"
+            app:layout_constraintEnd_toStartOf="@id/tvDurationValue"
+            android:text="@string/duration"/>
+
+        <TextView
+            android:id="@+id/tvDurationValue"
+            style="@style/InfoRowValue"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline_16"
+            app:layout_constraintStart_toEndOf="@id/tvDurationLabel"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvDurationLabel"
+            android:text="@string/song_time_placeholder"
+            tools:text="@string/song_time_placeholder" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tvYearLabel, tvYearValue" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupAlbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tvAlbumLabel,tvAlbumValue" />
+
+        <TextView
+            android:id="@+id/tvAlbumLabel"
+            style="@style/InfoRowLabel"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintBottom_toTopOf="@id/tvYearLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvDurationLabel"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_16"
+            app:layout_constraintEnd_toStartOf="@id/tvAlbumValue"
+            android:text="@string/album"/>
+
+        <TextView
+            style="@style/InfoRowValue"
+            android:id="@+id/tvAlbumValue"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline_16"
+            app:layout_constraintStart_toEndOf="@id/tvAlbumLabel"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvAlbumLabel"
+            android:text="@string/album"
+            tools:text="@string/song_name_placeholder" />
+
+        <TextView
+            android:id="@+id/tvYearLabel"
+            style="@style/InfoRowLabel"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintBottom_toTopOf="@id/tvGenreLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvAlbumLabel"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_16"
+            app:layout_constraintEnd_toStartOf="@id/tvYearValue"
+            android:text="@string/year"/>
+
+        <TextView
+            android:id="@+id/tvYearValue"
+            style="@style/InfoRowValue"
+            app:layout_constraintStart_toEndOf="@id/tvYearLabel"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline_16"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvYearLabel"
+            android:text="@string/year"
+            tools:text="@string/song_name_placeholder"/>
+        <TextView
+            android:id="@+id/tvGenreLabel"
+            style="@style/InfoRowLabel"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintBottom_toTopOf="@id/tvCountryLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvYearLabel"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_16"
+            app:layout_constraintEnd_toStartOf="@id/tvGenreValue"
+            android:text="@string/genre"/>
+
+        <TextView
+            android:id="@+id/tvGenreValue"
+            style="@style/InfoRowValue"
+            app:layout_constraintStart_toEndOf="@id/tvGenreLabel"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline_16"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvGenreLabel"
+            android:text="@string/genre"
+            tools:text="@string/song_name_placeholder"/>
+
+        <TextView
+            android:id="@+id/tvCountryLabel"
+            style="@style/InfoRowLabel"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvGenreLabel"
+            app:layout_constraintStart_toEndOf="@id/left_guideline_16"
+            app:layout_constraintEnd_toStartOf="@id/tvCountryValue"
+            android:text="@string/country"/>
+
+        <TextView
+            android:id="@+id/tvCountryValue"
+            style="@style/InfoRowValue"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline_16"
+            app:layout_constraintStart_toEndOf="@id/tvCountryLabel"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvCountryLabel"
+            android:text="@string/country"
+            tools:text="@string/song_name_placeholder" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

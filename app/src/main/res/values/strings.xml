@@ -22,4 +22,15 @@
     <string name="some_text_placeholder">какой-то текст</string>
     <string name="something_went_wrong_placeholder">Проблемы со связью.\n\nЗагрузка не удалась. Проверьте подключение к интернету</string>
     <string name="update">Обновить</string>
+    <string name="history_header">Вы искали</string>
+    <string name="clean_history">Очистить историю</string>
+    <string name="album_cover_content_description">AlbumCover</string>
+    <string name="duration">Длительность</string>
+    <string name="album">Альбом</string>
+    <string name="year">Год</string>
+    <string name="genre">Жанр</string>
+    <string name="country">Страна</string>
+    <string name="add_to_playlist">добавление в плейлист</string>
+    <string name="play_track">Включение трека</string>
+    <string name="add_to_favorites">Добавить в избранное</string>
 </resources>
