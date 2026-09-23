@@ -9,8 +9,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
+
+    private lateinit var themeSwitcher: SwitchMaterial
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,6 +27,12 @@ class SettingsActivity : AppCompatActivity() {
 
         val backArrow = findViewById<ImageView>(R.id.back_arrow)
         backArrow.setOnClickListener{ finish() }
+
+        themeSwitcher = findViewById(R.id.switch_dark_mode)
+        themeSwitcher.setChecked((application as App).isDark())
+        themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
+            (application as App).switchTheme(checked)
+        }
 
         val buttonShare = findViewById<LinearLayout>(R.id.clickable_share_row)
         buttonShare.setOnClickListener {
