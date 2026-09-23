@@ -156,6 +156,18 @@
             android:text="@string/song_time_placeholder"
             tools:text="@string/song_time_placeholder" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tvYearLabel, tvYearValue" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupAlbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tvAlbumLabel,tvAlbumValue" />
+
         <TextView
             android:id="@+id/tvAlbumLabel"
             style="@style/InfoRowLabel"
