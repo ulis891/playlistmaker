@@ -1,10 +1,12 @@
 package com.practicum.playlistmaker
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.Group
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
@@ -38,15 +40,25 @@ class PlayerActivity : AppCompatActivity() {
         Glide.with(this)
             .load(track.getCoverArtwork())
             .centerCrop()
-            .transform(RoundedCorners(Utils.dpToPx(2f, this)))
+            .transform(RoundedCorners(Utils.dpToPx(8f, this)))
             .placeholder(R.drawable.album_image_placeholder_45)
             .error(R.drawable.album_image_placeholder_45)
             .into(findViewById(R.id.ivAlbumCover))
         findViewById<TextView>(R.id.tvSongName).text = track.trackName
         findViewById<TextView>(R.id.tvArtistName).text = track.artistName
         findViewById<TextView>(R.id.tvDurationValue).text = dateFormat.format(track.trackTime).toString()
-        findViewById<TextView>(R.id.tvAlbumValue).text = track.collectionName
-        findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.split("-")[0]
+        if (track.collectionName != ""){
+            findViewById<TextView>(R.id.tvAlbumValue).text = track.collectionName
+        }
+        else{
+            findViewById<Group>(R.id.groupAlbum).visibility = View.GONE
+        }
+        if (track.releaseDate != ""){
+            findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.split("-")[0]
+        }
+        else{
+            findViewById<Group>(R.id.groupYear).visibility = View.GONE
+        }
         findViewById<TextView>(R.id.tvGenreValue).text = track.primaryGenreName
         findViewById<TextView>(R.id.tvCountryValue).text = track.country
     }
