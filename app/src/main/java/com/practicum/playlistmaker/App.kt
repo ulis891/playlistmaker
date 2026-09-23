@@ -19,7 +19,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        var darkTheme = getDarkThemePreference()
+        val darkTheme = getDarkThemePreference()
         switchTheme(darkTheme)
     }
 
