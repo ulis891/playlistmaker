@@ -7,6 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun bindTrack(track: Track) {
+        val dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
         Glide.with(this)
             .load(track.getCoverArtwork())
             .centerCrop()
@@ -39,9 +44,9 @@ class PlayerActivity : AppCompatActivity() {
             .into(findViewById(R.id.ivAlbumCover))
         findViewById<TextView>(R.id.tvSongName).text = track.trackName
         findViewById<TextView>(R.id.tvArtistName).text = track.artistName
-        findViewById<TextView>(R.id.tvDurationValue).text = track.trackTime.toString()
+        findViewById<TextView>(R.id.tvDurationValue).text = dateFormat.format(track.trackTime).toString()
         findViewById<TextView>(R.id.tvAlbumValue).text = track.collectionName
-        findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.toString()
+        findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.split("-")[0]
         findViewById<TextView>(R.id.tvGenreValue).text = track.primaryGenreName
         findViewById<TextView>(R.id.tvCountryValue).text = track.country
     }
