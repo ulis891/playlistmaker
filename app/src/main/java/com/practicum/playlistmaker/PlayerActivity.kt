@@ -30,6 +30,13 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun bindTrack(track: Track) {
+        Glide.with(this)
+            .load(track.getCoverArtwork())
+            .centerCrop()
+            .transform(RoundedCorners(Utils.dpToPx(2f, this)))
+            .placeholder(R.drawable.album_image_placeholder_45)
+            .error(R.drawable.album_image_placeholder_45)
+            .into(findViewById(R.id.ivAlbumCover))
         findViewById<TextView>(R.id.tvSongName).text = track.trackName
         findViewById<TextView>(R.id.tvArtistName).text = track.artistName
         findViewById<TextView>(R.id.tvDurationValue).text = track.trackTime.toString()
