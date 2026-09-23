@@ -9,7 +9,7 @@ data class Track(
     @SerializedName("trackTimeMillis") val trackTime: Long,
     val artworkUrl100: String,
     val collectionName: String,
-    val releaseDate: Int,
+    val releaseDate: String,
     val primaryGenreName: String,
     val country: String
 )
