@@ -98,7 +98,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvArtistName"
             app:layout_constraintStart_toEndOf="@id/ibAddToPlaylist"
             app:layout_constraintEnd_toStartOf="@id/ibAddToFavorites"
-            android:src="@drawable/ic_play_button_100"
+            android:src="@drawable/ic_play_button_84"
             android:backgroundTint="@color/regular_background"        />
         <ImageButton
             android:id="@+id/ibAddToFavorites"
