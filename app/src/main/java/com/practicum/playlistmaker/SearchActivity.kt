@@ -1,5 +1,6 @@
 package com.practicum.playlistmaker
 
+import android.content.Intent
 import android.view.inputmethod.InputMethodManager
 import android.os.Bundle
 import android.view.View
@@ -65,16 +66,16 @@ class SearchActivity : AppCompatActivity() {
             insets
         }
 
-        val sharedPrefs = getSharedPreferences("playlist_maker_preferences", MODE_PRIVATE)
-        val searchHistory = SearchHistory(sharedPrefs)
-
+        val searchHistory = (application as App).searchHistory
 
         tracksAdapter = TrackAdapter(trackList) { track ->
             searchHistory.addTrack(track)
+            startActivity(PlayerActivity.createIntent(this, track.trackId))
         }
 
         historyTrackList.addAll(searchHistory.readTrackList())
         tracksHistoryAdapter = TrackAdapter(historyTrackList) { track ->
+            startActivity(PlayerActivity.createIntent(this, track.trackId))
             searchHistory.addTrack(track)
             val history = searchHistory.readTrackList()
             historyTrackList.clear()

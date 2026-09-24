@@ -9,12 +9,17 @@ class App : Application() {
     companion object {
         private const val PREFS_NAME = "app_settings"
         private const val KEY_DARK_THEME = "dark_theme"
+        private const val PREFS_HISTORY = "history"
+    }
+
+    val searchHistory: SearchHistory by lazy {
+        SearchHistory(getSharedPreferences(PREFS_HISTORY, MODE_PRIVATE))
     }
 
 
     override fun onCreate() {
         super.onCreate()
-        var darkTheme = getDarkThemePreference()
+        val darkTheme = getDarkThemePreference()
         switchTheme(darkTheme)
     }
 
