@@ -58,18 +58,18 @@ class PlayerActivity : AppCompatActivity() {
             .into(findViewById(R.id.ivAlbumCover))
         findViewById<TextView>(R.id.tvSongName).text = track.trackName
         findViewById<TextView>(R.id.tvArtistName).text = track.artistName
-        findViewById<TextView>(R.id.tvDurationValue).text = dateFormat.format(track.trackTime).toString()
-        if (track.collectionName != ""){
-            findViewById<TextView>(R.id.tvAlbumValue).text = track.collectionName
-        }
-        else{
+        findViewById<TextView>(R.id.tvDurationValue).text = dateFormat.format(track.trackTime)
+        if (track.collectionName.isEmpty()){
             findViewById<Group>(R.id.groupAlbum).visibility = View.GONE
         }
-        if (track.releaseDate != ""){
-            findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.split("-")[0]
+        else{
+            findViewById<TextView>(R.id.tvAlbumValue).text = track.collectionName
+        }
+        if (track.releaseDate.isEmpty()){
+            findViewById<Group>(R.id.groupYear).visibility = View.GONE
         }
         else{
-            findViewById<Group>(R.id.groupYear).visibility = View.GONE
+            findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.split("-")[0]
         }
         findViewById<TextView>(R.id.tvGenreValue).text = track.primaryGenreName
         findViewById<TextView>(R.id.tvCountryValue).text = track.country
