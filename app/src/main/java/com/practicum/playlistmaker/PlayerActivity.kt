@@ -1,5 +1,7 @@
 package com.practicum.playlistmaker
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -15,6 +17,16 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class PlayerActivity : AppCompatActivity() {
+
+    companion object {
+        private const val EXTRA_TRACK_ID = "track_id"
+
+        fun createIntent(context: Context, trackId: String): Intent =
+            Intent(context, PlayerActivity::class.java).apply {
+                putExtra(EXTRA_TRACK_ID, trackId)
+            }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,7 +39,7 @@ class PlayerActivity : AppCompatActivity() {
 
         findViewById<ImageView>(R.id.back_arrow).setOnClickListener { finish() }
 
-        val trackId = intent.getStringExtra("track_id")
+        val trackId = intent.getStringExtra(EXTRA_TRACK_ID)
         val track = trackId?.let { id ->
             (application as App).searchHistory.readTrackList().find { it.trackId == id }
         }

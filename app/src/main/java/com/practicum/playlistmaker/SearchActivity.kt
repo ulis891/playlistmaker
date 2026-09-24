@@ -70,16 +70,12 @@ class SearchActivity : AppCompatActivity() {
 
         tracksAdapter = TrackAdapter(trackList) { track ->
             searchHistory.addTrack(track)
-            val playerIntent = Intent(this, PlayerActivity::class.java).apply {
-                putExtra("track_id", track.trackId) }
-            startActivity(playerIntent)
+            startActivity(PlayerActivity.createIntent(this, track.trackId))
         }
 
         historyTrackList.addAll(searchHistory.readTrackList())
         tracksHistoryAdapter = TrackAdapter(historyTrackList) { track ->
-            val playerIntent = Intent(this, PlayerActivity::class.java).apply {
-                putExtra("track_id", track.trackId) }
-            startActivity(playerIntent)
+            startActivity(PlayerActivity.createIntent(this, track.trackId))
             searchHistory.addTrack(track)
             val history = searchHistory.readTrackList()
             historyTrackList.clear()
