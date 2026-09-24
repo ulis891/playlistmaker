@@ -67,9 +67,6 @@ class SearchActivity : AppCompatActivity() {
         }
 
         val searchHistory = (application as App).searchHistory
-//        val sharedPrefs = getSharedPreferences("playlist_maker_preferences", MODE_PRIVATE)
-//        val searchHistory = SearchHistory(sharedPrefs)
-
 
         tracksAdapter = TrackAdapter(trackList) { track ->
             searchHistory.addTrack(track)
