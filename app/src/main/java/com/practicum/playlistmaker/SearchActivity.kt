@@ -3,6 +3,8 @@ package com.practicum.playlistmaker
 import android.content.Intent
 import android.view.inputmethod.InputMethodManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -32,6 +34,7 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         const val KEY_SEARCH_TEXT = "KEY_SEARCH_TEXT"
         const val EMPTY_TEXT = ""
+        private const val SEARCH_DEBOUNCE_DELAY = 2000L
     }
 
     val trackList = mutableListOf<Track>()
@@ -55,6 +58,8 @@ class SearchActivity : AppCompatActivity() {
 
     private val iTunesService = retrofit.create(ITunesAPI:: class.java)
     private var currentText: String = EMPTY_TEXT
+
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,6 +154,13 @@ class SearchActivity : AppCompatActivity() {
             }   )
         }
 
+        val searchRunnable  = Runnable {tracksSearch(currentText)}
+
+        fun searchDebounce() {
+            handler.removeCallbacks(searchRunnable)
+            handler.postDelayed(searchRunnable, SEARCH_DEBOUNCE_DELAY)
+        }
+
         fun showHistory(history: List<Track>){
             historyTrackList.clear()
             historyTrackList.addAll(history)
@@ -182,10 +194,13 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 if (text?.isEmpty() == true) {
+                    handler.removeCallbacks(searchRunnable)
                     trackList.clear()
                     tracksAdapter.notifyDataSetChanged()
                     rvTracks.visibility = View.GONE
                     goneProblemsPlaceholders()
+                } else {
+                    searchDebounce()
                 }
             },
 
