@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -50,6 +51,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var historyTracks: RecyclerView
     private lateinit var tracksHistoryAdapter: TrackAdapter
     private lateinit var clearHistoryButton: MaterialButton
+    private lateinit var progressBar: ProgressBar
     private val iTunesBaseURL = "https://itunes.apple.com/"
     private val retrofit = Retrofit.Builder()
         .baseUrl(iTunesBaseURL)
@@ -124,8 +126,9 @@ class SearchActivity : AppCompatActivity() {
         rvTracks.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvTracks.adapter = tracksAdapter
         rvTracks.visibility = View.GONE
-
         val tracksSearch: (String) -> Unit = { requestText ->
+            progressBar = findViewById(R.id.progressBar)
+            progressBar.visibility = View.VISIBLE
             iTunesService.getSongs(requestText)
                 .enqueue(object : Callback<TracksResponse> {
                     override fun onResponse(
@@ -139,6 +142,7 @@ class SearchActivity : AppCompatActivity() {
                                 goneProblemsPlaceholders()
                                 trackList.addAll(responseBody)
                                 rvTracks.visibility = View.VISIBLE
+                                progressBar.visibility = View.GONE
                             }
                             if (trackList.isEmpty()) {
                                 showMessage("")
