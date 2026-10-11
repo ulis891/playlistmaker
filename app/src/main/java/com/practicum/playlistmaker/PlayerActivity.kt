@@ -2,8 +2,10 @@ package com.practicum.playlistmaker
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -25,7 +27,16 @@ class PlayerActivity : AppCompatActivity() {
             Intent(context, PlayerActivity::class.java).apply {
                 putExtra(EXTRA_TRACK_ID, trackId)
             }
+
+        private const val STATE_DEFAULT = 0
+        private const val STATE_PREPARED = 1
+        private const val STATE_PLAYING = 2
+        private const val STATE_PAUSED = 3
     }
+
+    private var playerState = STATE_DEFAULT
+    private  lateinit var play: ImageButton
+    private var mediaPlayer  = MediaPlayer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +49,10 @@ class PlayerActivity : AppCompatActivity() {
         }
 
         findViewById<ImageView>(R.id.back_arrow).setOnClickListener { finish() }
+        play = findViewById(R.id.ibPlay)
+        play.setOnClickListener {
+            playbackControl()
+        }
 
         val trackId = intent.getStringExtra(EXTRA_TRACK_ID)
         val track = trackId?.let { id ->
@@ -45,6 +60,17 @@ class PlayerActivity : AppCompatActivity() {
         }
 
         track?.let { bindTrack(it) }
+        preparePlayer(track?.previewUrl)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        pausePlayer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer.release()
     }
 
     private fun bindTrack(track: Track) {
@@ -73,5 +99,40 @@ class PlayerActivity : AppCompatActivity() {
         }
         findViewById<TextView>(R.id.tvGenreValue).text = track.primaryGenreName
         findViewById<TextView>(R.id.tvCountryValue).text = track.country
+    }
+
+    private fun preparePlayer(url: String?){
+        mediaPlayer.setDataSource(url)
+        mediaPlayer.prepareAsync()
+        mediaPlayer.setOnPreparedListener {
+            play.isEnabled = true
+            playerState = STATE_PREPARED
+        }
+        mediaPlayer.setOnCompletionListener {
+            play.setImageResource(R.drawable.ic_play_button_84)
+        }
+    }
+
+    private fun startPlayer() {
+        mediaPlayer.start()
+        play.setImageResource(R.drawable.ic_pause_button_84)
+        playerState = STATE_PLAYING
+    }
+
+    private fun pausePlayer(){
+        mediaPlayer.pause()
+        play.setImageResource(R.drawable.ic_play_button_84)
+        playerState = STATE_PAUSED
+    }
+
+    private fun playbackControl() {
+        when(playerState) {
+            STATE_PLAYING -> {
+                pausePlayer()
+            }
+            STATE_PREPARED, STATE_PAUSED -> {
+                startPlayer()
+            }
+        }
     }
 }
