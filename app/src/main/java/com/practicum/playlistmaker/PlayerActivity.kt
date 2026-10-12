@@ -35,7 +35,7 @@ class PlayerActivity : AppCompatActivity() {
         private const val STATE_PLAYING = 2
         private const val STATE_PAUSED = 3
 
-        private const val TRACK_DEBOUNCE_DELAY = 1500L
+        private const val TRACK_DEBOUNCE_DELAY = 1000L
     }
 
     private var playerState = STATE_DEFAULT
@@ -44,6 +44,16 @@ class PlayerActivity : AppCompatActivity() {
 
     private var mediaPlayer  = MediaPlayer()
     private val handler = Handler(Looper.getMainLooper())
+    private val updateTrackDurationRunnable = object : Runnable {
+        private var dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
+        override fun run() {
+            if (playerState == STATE_PLAYING){
+                playTime.text = dateFormat.format(mediaPlayer.currentPosition)
+                handler.postDelayed(this, TRACK_DEBOUNCE_DELAY)
+            }
+
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,8 +126,8 @@ class PlayerActivity : AppCompatActivity() {
             playerState = STATE_PREPARED
         }
         mediaPlayer.setOnCompletionListener {
+            handler.removeCallbacks(updateTrackDurationRunnable)
             play.setImageResource(R.drawable.ic_play_button_84)
-            handler.removeCallbacks(updateTrackDuration())
             playTime.setText(R.string.song_time_placeholder)
         }
     }
@@ -126,7 +136,7 @@ class PlayerActivity : AppCompatActivity() {
         mediaPlayer.start()
         play.setImageResource(R.drawable.ic_pause_button_84)
         playerState = STATE_PLAYING
-        handler.postDelayed(updateTrackDuration(), TRACK_DEBOUNCE_DELAY)
+        handler.postDelayed(updateTrackDurationRunnable, TRACK_DEBOUNCE_DELAY)
     }
 
     private fun pausePlayer(){
@@ -142,16 +152,6 @@ class PlayerActivity : AppCompatActivity() {
             }
             STATE_PREPARED, STATE_PAUSED -> {
                 startPlayer()
-            }
-        }
-    }
-
-    private fun updateTrackDuration (): Runnable{
-        return object: Runnable {
-            val dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
-            override fun run(){
-                playTime.text = dateFormat.format(mediaPlayer.currentPosition)
-                handler.postDelayed(this, TRACK_DEBOUNCE_DELAY)
             }
         }
     }
