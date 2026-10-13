@@ -91,7 +91,7 @@
                 android:layout_height="44dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="140dp"
-                android:indeterminateTint="@color/progress_Bar_color"
+                android:indeterminateTint="@color/progress_bar_color"
                 android:visibility="gone"/>
             <LinearLayout
                 android:id="@+id/history_view"
