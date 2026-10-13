@@ -126,6 +126,7 @@ class PlayerActivity : AppCompatActivity() {
         }
         mediaPlayer.setOnCompletionListener {
             handler.removeCallbacks(updateTrackDurationRunnable)
+            playerState = STATE_PREPARED
             play.setImageResource(R.drawable.ic_play_button_84)
             playTime.setText(R.string.song_time_placeholder)
         }
