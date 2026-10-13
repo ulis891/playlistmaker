@@ -87,6 +87,7 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        handler.removeCallbacks(updateTrackDurationRunnable)
         mediaPlayer.release()
     }
 
