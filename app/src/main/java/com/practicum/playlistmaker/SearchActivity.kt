@@ -3,6 +3,8 @@ package com.practicum.playlistmaker
 import android.content.Intent
 import android.view.inputmethod.InputMethodManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -10,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +35,7 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         const val KEY_SEARCH_TEXT = "KEY_SEARCH_TEXT"
         const val EMPTY_TEXT = ""
+        private const val SEARCH_DEBOUNCE_DELAY = 2000L
     }
 
     val trackList = mutableListOf<Track>()
@@ -47,6 +51,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var historyTracks: RecyclerView
     private lateinit var tracksHistoryAdapter: TrackAdapter
     private lateinit var clearHistoryButton: MaterialButton
+    private lateinit var progressBar: ProgressBar
     private val iTunesBaseURL = "https://itunes.apple.com/"
     private val retrofit = Retrofit.Builder()
         .baseUrl(iTunesBaseURL)
@@ -55,6 +60,8 @@ class SearchActivity : AppCompatActivity() {
 
     private val iTunesService = retrofit.create(ITunesAPI:: class.java)
     private var currentText: String = EMPTY_TEXT
+
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,8 +126,9 @@ class SearchActivity : AppCompatActivity() {
         rvTracks.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvTracks.adapter = tracksAdapter
         rvTracks.visibility = View.GONE
-
         val tracksSearch: (String) -> Unit = { requestText ->
+            progressBar = findViewById(R.id.progressBar)
+            progressBar.visibility = View.VISIBLE
             iTunesService.getSongs(requestText)
                 .enqueue(object : Callback<TracksResponse> {
                     override fun onResponse(
@@ -141,12 +149,20 @@ class SearchActivity : AppCompatActivity() {
                                 tracksAdapter.notifyDataSetChanged()
                             }
                         }
+                    progressBar.visibility = View.GONE
                     }
 
                     override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
                         showMessage(getString(R.string.something_went_wrong_placeholder))
                     }
             }   )
+        }
+
+        val searchRunnable  = Runnable {tracksSearch(currentText)}
+
+        fun searchDebounce() {
+            handler.removeCallbacks(searchRunnable)
+            handler.postDelayed(searchRunnable, SEARCH_DEBOUNCE_DELAY)
         }
 
         fun showHistory(history: List<Track>){
@@ -182,10 +198,13 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 if (text?.isEmpty() == true) {
+                    handler.removeCallbacks(searchRunnable)
                     trackList.clear()
                     tracksAdapter.notifyDataSetChanged()
                     rvTracks.visibility = View.GONE
                     goneProblemsPlaceholders()
+                } else {
+                    searchDebounce()
                 }
             },
 
@@ -213,6 +232,7 @@ class SearchActivity : AppCompatActivity() {
         trackList.clear()
         tracksAdapter.notifyDataSetChanged()
         rvTracks.visibility = View.GONE
+        progressBar.visibility = View.GONE
         if (message.isEmpty()){
             problemsIconPlaceholder.setImageResource(R.drawable.ic_nothing_result_placeholder_120)
             problemsTextPlaceholder.text = getString(R.string.nothing_result_placeholder)

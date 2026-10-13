@@ -1,5 +1,7 @@
 package com.practicum.playlistmaker
 
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -17,6 +19,21 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val tvArtistName: TextView = itemView.findViewById(R.id.tvArtistName)
     private val tvDuration: TextView = itemView.findViewById(R.id.tvSongDuration)
     private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
+
+    companion object {
+        private const val CLICK_DEBOUNCE_DELAY = 1000L
+    }
+    var isClicked = true
+    private val handler = Handler(Looper.getMainLooper())
+
+    fun clickDebounce(): Boolean{
+            if (isClicked) {
+                    isClicked = false
+                    handler.postDelayed({ isClicked = true }, CLICK_DEBOUNCE_DELAY)
+                    return true
+            }
+            return false
+    }
 
     fun bind(track: Track) {
         val trackName = track.trackName

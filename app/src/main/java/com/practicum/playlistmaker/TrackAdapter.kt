@@ -15,7 +15,9 @@ class TrackAdapter(
             val track = trackList[position]
             holder.bind(track)
             holder.itemView.setOnClickListener {
-                onTrackClick(track)
+                if (holder.clickDebounce()) {
+                    onTrackClick(track)
+                }
             }
         }
 
