@@ -14,5 +14,6 @@
     <color name="second_text">@color/gray</color>
     <color name="button_text">@color/white</color>
     <color name="button_color">@color/black</color>
+    <color name="button_color_revers">@color/white</color>
     <color name="progress_bar_color">@color/blue</color>
 </resources>
