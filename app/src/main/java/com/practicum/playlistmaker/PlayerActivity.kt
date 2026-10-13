@@ -120,7 +120,6 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun preparePlayer(url: String?){
         mediaPlayer.setDataSource(url)
-        mediaPlayer.prepareAsync()
         mediaPlayer.setOnPreparedListener {
             play.isEnabled = true
             playerState = STATE_PREPARED
@@ -130,6 +129,7 @@ class PlayerActivity : AppCompatActivity() {
             play.setImageResource(R.drawable.ic_play_button_84)
             playTime.setText(R.string.song_time_placeholder)
         }
+        mediaPlayer.prepareAsync()
     }
 
     private fun startPlayer() {
