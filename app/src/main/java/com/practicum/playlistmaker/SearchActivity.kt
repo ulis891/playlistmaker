@@ -142,7 +142,6 @@ class SearchActivity : AppCompatActivity() {
                                 goneProblemsPlaceholders()
                                 trackList.addAll(responseBody)
                                 rvTracks.visibility = View.VISIBLE
-                                progressBar.visibility = View.GONE
                             }
                             if (trackList.isEmpty()) {
                                 showMessage("")
@@ -150,6 +149,7 @@ class SearchActivity : AppCompatActivity() {
                                 tracksAdapter.notifyDataSetChanged()
                             }
                         }
+                    progressBar.visibility = View.GONE
                     }
 
                     override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
@@ -232,6 +232,7 @@ class SearchActivity : AppCompatActivity() {
         trackList.clear()
         tracksAdapter.notifyDataSetChanged()
         rvTracks.visibility = View.GONE
+        progressBar.visibility = View.GONE
         if (message.isEmpty()){
             problemsIconPlaceholder.setImageResource(R.drawable.ic_nothing_result_placeholder_120)
             problemsTextPlaceholder.text = getString(R.string.nothing_result_placeholder)
