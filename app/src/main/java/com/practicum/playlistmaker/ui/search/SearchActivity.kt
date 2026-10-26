@@ -1,6 +1,5 @@
-package com.practicum.playlistmaker
+package com.practicum.playlistmaker.ui.search
 
-import android.content.Intent
 import android.view.inputmethod.InputMethodManager
 import android.os.Bundle
 import android.os.Handler
@@ -22,6 +21,13 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import com.practicum.playlistmaker.App
+import com.practicum.playlistmaker.R
+import com.practicum.playlistmaker.data.dto.TracksResponse
+import com.practicum.playlistmaker.data.network.ITunesAPI
+import com.practicum.playlistmaker.domain.models.Track
+import com.practicum.playlistmaker.ui.player.PlayerActivity
+import com.practicum.playlistmaker.ui.tracks.TrackAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -80,11 +86,11 @@ class SearchActivity : AppCompatActivity() {
             startActivity(PlayerActivity.createIntent(this, track.trackId))
         }
 
-        historyTrackList.addAll(searchHistory.readTrackList())
+        historyTrackList.addAll(searchHistory.getTracks())
         tracksHistoryAdapter = TrackAdapter(historyTrackList) { track ->
             startActivity(PlayerActivity.createIntent(this, track.trackId))
             searchHistory.addTrack(track)
-            val history = searchHistory.readTrackList()
+            val history = searchHistory.getTracks()
             historyTrackList.clear()
             historyTrackList.addAll(history)
             tracksHistoryAdapter.notifyDataSetChanged()
@@ -116,7 +122,7 @@ class SearchActivity : AppCompatActivity() {
 
         clearHistoryButton = findViewById(R.id.clear_history_button)
         clearHistoryButton.setOnClickListener {
-            searchHistory.clearTrackList()
+            searchHistory.clear()
             historyTrackList.clear()
             tracksHistoryAdapter.notifyDataSetChanged()
             rvTrackHistory.visibility = View.GONE
@@ -177,7 +183,7 @@ class SearchActivity : AppCompatActivity() {
 
         editText = findViewById(R.id.search_text_input)
         editText.setOnFocusChangeListener { _, hasFocus ->
-            val history = searchHistory.readTrackList()
+            val history = searchHistory.getTracks()
             if (hasFocus && editText.text.isEmpty() && history.isNotEmpty()) {
                 showHistory(history)
             } else {
@@ -190,7 +196,7 @@ class SearchActivity : AppCompatActivity() {
             onTextChanged = { text, _, _, _ ->
                 clearButton.visibility = if (text.isNullOrEmpty()) View.GONE else View.VISIBLE
 
-                val history = searchHistory.readTrackList()
+                val history = searchHistory.getTracks()
                 if (editText.hasFocus() && text?.isEmpty() == true && history.isNotEmpty()) {
                     showHistory(history)
                 } else {

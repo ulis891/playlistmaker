@@ -1,8 +1,8 @@
 package com.practicum.playlistmaker
 
 import android.app.Application
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatDelegate
+import com.practicum.playlistmaker.domain.impl.SearchHistoryImpl
 
 class App : Application() {
 
@@ -12,8 +12,8 @@ class App : Application() {
         private const val PREFS_HISTORY = "history"
     }
 
-    val searchHistory: SearchHistory by lazy {
-        SearchHistory(getSharedPreferences(PREFS_HISTORY, MODE_PRIVATE))
+    val searchHistory: SearchHistoryImpl by lazy {
+        SearchHistoryImpl(getSharedPreferences(PREFS_HISTORY, MODE_PRIVATE))
     }
 
 

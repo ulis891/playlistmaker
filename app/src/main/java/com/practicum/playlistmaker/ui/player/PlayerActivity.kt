@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker
+package com.practicum.playlistmaker.ui.player
 
 import android.content.Context
 import android.content.Intent
@@ -17,6 +17,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.practicum.playlistmaker.App
+import com.practicum.playlistmaker.R
+import com.practicum.playlistmaker.Utils
+import com.practicum.playlistmaker.domain.models.Track
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -73,7 +77,7 @@ class PlayerActivity : AppCompatActivity() {
         playTime = findViewById(R.id.tvPlayTime)
         val trackId = intent.getStringExtra(EXTRA_TRACK_ID)
         val track = trackId?.let { id ->
-            (application as App).searchHistory.readTrackList().find { it.trackId == id }
+            (application as App).searchHistory.getTracks().find { it.trackId == id }
         }
 
         track?.let { bindTrack(it) }
