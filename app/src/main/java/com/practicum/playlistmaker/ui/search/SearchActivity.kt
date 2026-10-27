@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.R
-import com.practicum.playlistmaker.data.dto.TracksResponse
+import com.practicum.playlistmaker.data.dto.TracksSearchResponse
 import com.practicum.playlistmaker.data.network.ITunesAPI
 import com.practicum.playlistmaker.domain.models.Track
 import com.practicum.playlistmaker.ui.player.PlayerActivity
@@ -136,10 +136,10 @@ class SearchActivity : AppCompatActivity() {
             progressBar = findViewById(R.id.progressBar)
             progressBar.visibility = View.VISIBLE
             iTunesService.getSongs(requestText)
-                .enqueue(object : Callback<TracksResponse> {
+                .enqueue(object : Callback<TracksSearchResponse> {
                     override fun onResponse(
-                        call: Call<TracksResponse>,
-                        response: Response<TracksResponse>
+                        call: Call<TracksSearchResponse>,
+                        response: Response<TracksSearchResponse>
                     ) {
                         if (response.isSuccessful) {
                             trackList.clear()
@@ -158,7 +158,7 @@ class SearchActivity : AppCompatActivity() {
                     progressBar.visibility = View.GONE
                     }
 
-                    override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<TracksSearchResponse>, t: Throwable) {
                         showMessage(getString(R.string.something_went_wrong_placeholder))
                     }
             }   )
