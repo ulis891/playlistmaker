@@ -41,7 +41,7 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(track: Track) {
         val trackName = track.trackName
         val artistName = track.artistName
-        val duration = track.trackTime
+        val duration = track.formattedDuration
         val albumArt = track.artworkUrl100
 
         val context = itemView.context

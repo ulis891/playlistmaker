@@ -1,12 +1,11 @@
 package com.practicum.playlistmaker.domain.models
 
-import com.google.gson.annotations.SerializedName
 
 data class Track(
     val trackId: String,
     val trackName: String,
     val artistName: String,
-    @SerializedName("trackTimeMillis") val trackTime: Long,
+    val formattedDuration: String,
     val artworkUrl100: String,
     val collectionName: String,
     val releaseDate: String,

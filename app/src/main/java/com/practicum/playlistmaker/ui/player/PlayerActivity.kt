@@ -106,7 +106,7 @@ class PlayerActivity : AppCompatActivity() {
             .into(findViewById(R.id.ivAlbumCover))
         findViewById<TextView>(R.id.tvSongName).text = track.trackName
         findViewById<TextView>(R.id.tvArtistName).text = track.artistName
-        findViewById<TextView>(R.id.tvDurationValue).text = dateFormat.format(track.trackTime)
+        findViewById<TextView>(R.id.tvDurationValue).text = track.formattedDuration
         if (track.collectionName.isEmpty()){
             findViewById<Group>(R.id.groupAlbum).visibility = View.GONE
         }
