@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.R
+import com.practicum.playlistmaker.Utils.toTrack
 import com.practicum.playlistmaker.data.dto.TracksSearchResponse
 import com.practicum.playlistmaker.data.network.ITunesAPI
 import com.practicum.playlistmaker.domain.models.Track
@@ -146,7 +147,7 @@ class SearchActivity : AppCompatActivity() {
                             val responseBody = response.body()?.results
                             if (responseBody?.isNotEmpty() ?: false) {
                                 goneProblemsPlaceholders()
-                                trackList.addAll(responseBody)
+                                trackList.addAll(responseBody.map { it.toTrack() })
                                 rvTracks.visibility = View.VISIBLE
                             }
                             if (trackList.isEmpty()) {

@@ -21,7 +21,6 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val tvTrackName: TextView = itemView.findViewById(R.id.tvSongName)
     private val tvArtistName: TextView = itemView.findViewById(R.id.tvArtistName)
     private val tvDuration: TextView = itemView.findViewById(R.id.tvSongDuration)
-    private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
 
     companion object {
         private const val CLICK_DEBOUNCE_DELAY = 1000L
@@ -55,6 +54,6 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             .into(ivTrackCover)
         tvTrackName.text = trackName
         tvArtistName.text = artistName
-        tvDuration.text = dateFormat.format(duration)
+        tvDuration.text = duration
     }
 }
