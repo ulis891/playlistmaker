@@ -1,10 +1,10 @@
 package com.practicum.playlistmaker.domain.models
 
-
 data class Track(
     val trackId: String,
     val trackName: String,
     val artistName: String,
+    val trackTimeMillis: Long,
     val formattedDuration: String,
     val artworkUrl100: String,
     val collectionName: String,
@@ -13,7 +13,5 @@ data class Track(
     val country: String,
     val previewUrl: String
 ) {
-    fun getCoverArtwork() = artworkUrl100.replaceAfterLast('/',"512x512bb.jpg")
+    fun getCoverArtwork() = artworkUrl100.replaceAfterLast('/', "512x512bb.jpg")
 }
-
-
