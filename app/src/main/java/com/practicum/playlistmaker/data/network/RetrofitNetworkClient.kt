@@ -13,17 +13,15 @@ class RetrofitNetworkClient : NetworkClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val iTunesService = retrofit.create(ITunesAPI:: class.java)
+    private val iTunesService = retrofit.create(ITunesAPI::class.java)
 
     override fun doRequest(dto: Any): Response {
-        val result = Response()
         if (dto is TracksSearchRequest) {
             val response = iTunesService.getSongs(dto.expression).execute()
-            result.resultCode = if (response.isSuccessful) 200 else 400
-            return result
+            val body = response.body() ?: Response()
+            return body.apply { resultCode = response.code() }
+            } else {
+                return Response().apply { resultCode = 400 }
+            }
         }
-        else{
-            return Response().apply { resultCode = 400 }
-        }
-    }
 }
