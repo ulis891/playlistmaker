@@ -11,11 +11,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.practicum.playlistmaker.App
+import com.practicum.playlistmaker.Creator
 import com.practicum.playlistmaker.R
+import com.practicum.playlistmaker.domain.api.SettingsInteractor
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var themeSwitcher: SwitchMaterial
+    private lateinit var settingsInteractor: SettingsInteractor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +30,14 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
+        settingsInteractor = Creator.provideSettingsInteractor(this)
+
         val backArrow = findViewById<ImageView>(R.id.back_arrow)
-        backArrow.setOnClickListener{ finish() }
+        backArrow.setOnClickListener { finish() }
 
         themeSwitcher = findViewById(R.id.switch_dark_mode)
-        themeSwitcher.setChecked((application as App).isDark())
-        themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
+        themeSwitcher.setChecked(settingsInteractor.isDarkTheme())
+        themeSwitcher.setOnCheckedChangeListener { _, checked ->
             (application as App).switchTheme(checked)
         }
 
@@ -63,6 +68,5 @@ class SettingsActivity : AppCompatActivity() {
             agreementIntent.data = Uri.parse(getString(R.string.url_agreement))
             startActivity(agreementIntent)
         }
-
     }
 }
