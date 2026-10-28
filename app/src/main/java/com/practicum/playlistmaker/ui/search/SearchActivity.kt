@@ -133,39 +133,37 @@ class SearchActivity : AppCompatActivity() {
         rvTracks.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvTracks.adapter = tracksAdapter
         rvTracks.visibility = View.GONE
-        val tracksSearch: (String) -> Unit = { requestText ->
-            progressBar = findViewById(R.id.progressBar)
-            progressBar.visibility = View.VISIBLE
-            iTunesService.getSongs(requestText)
-                .enqueue(object : Callback<TracksSearchResponse> {
-                    override fun onResponse(
-                        call: Call<TracksSearchResponse>,
-                        response: Response<TracksSearchResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            trackList.clear()
-                            val responseBody = response.body()?.results
-                            if (responseBody?.isNotEmpty() ?: false) {
-                                goneProblemsPlaceholders()
-                                trackList.addAll(responseBody.map { it.toTrack() })
-                                rvTracks.visibility = View.VISIBLE
-                            }
-                            if (trackList.isEmpty()) {
-                                showMessage("")
-                            } else {
-                                tracksAdapter.notifyDataSetChanged()
-                            }
-                        }
-                    progressBar.visibility = View.GONE
-                    }
 
-                    override fun onFailure(call: Call<TracksSearchResponse>, t: Throwable) {
+        progressBar = findViewById(R.id.progressBar)
+
+        val tracksSearch: (String) -> Unit = { requestText ->
+            progressBar.visibility = View.VISIBLE
+            tracksInteractor.searchTracks(requestText, object : TracksInteractor.TracksConsumer {
+                override fun consume(foundTracks: List<Track>) {
+                    runOnUiThread {
+                        progressBar.visibility = View.GONE
+                        trackList.clear()
+                        if (foundTracks.isNotEmpty()) {
+                            goneProblemsPlaceholders()
+                            trackList.addAll(foundTracks)
+                            tracksAdapter.notifyDataSetChanged()
+                            rvTracks.visibility = View.VISIBLE
+                        } else {
+                            showMessage("")
+                        }
+                    }
+                }
+
+                override fun onError(error: Throwable) {
+                    runOnUiThread {
+                        progressBar.visibility = View.GONE
                         showMessage(getString(R.string.something_went_wrong_placeholder))
                     }
-            }   )
+                }
+            })
         }
 
-        val searchRunnable  = Runnable {tracksSearch(currentText)}
+        val searchRunnable = Runnable { tracksSearch(currentText) }
 
         fun searchDebounce() {
             handler.removeCallbacks(searchRunnable)
