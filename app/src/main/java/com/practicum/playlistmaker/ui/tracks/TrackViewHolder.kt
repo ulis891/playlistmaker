@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker
+package com.practicum.playlistmaker.ui.tracks
 
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.practicum.playlistmaker.R
+import com.practicum.playlistmaker.Utils
+import com.practicum.playlistmaker.domain.models.Track
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -18,7 +21,6 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val tvTrackName: TextView = itemView.findViewById(R.id.tvSongName)
     private val tvArtistName: TextView = itemView.findViewById(R.id.tvArtistName)
     private val tvDuration: TextView = itemView.findViewById(R.id.tvSongDuration)
-    private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
 
     companion object {
         private const val CLICK_DEBOUNCE_DELAY = 1000L
@@ -38,7 +40,7 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(track: Track) {
         val trackName = track.trackName
         val artistName = track.artistName
-        val duration = track.trackTime
+        val duration = track.formattedDuration
         val albumArt = track.artworkUrl100
 
         val context = itemView.context
@@ -52,6 +54,6 @@ class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             .into(ivTrackCover)
         tvTrackName.text = trackName
         tvArtistName.text = artistName
-        tvDuration.text = dateFormat.format(duration)
+        tvDuration.text = duration
     }
 }
