@@ -17,7 +17,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.practicum.playlistmaker.App
+import com.practicum.playlistmaker.Creator
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.Utils
 import com.practicum.playlistmaker.domain.models.Track
@@ -43,19 +43,18 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private var playerState = STATE_DEFAULT
-    private  lateinit var play: ImageButton
-    private  lateinit var playTime: TextView
+    private lateinit var play: ImageButton
+    private lateinit var playTime: TextView
 
-    private var mediaPlayer  = MediaPlayer()
+    private var mediaPlayer = MediaPlayer()
     private val handler = Handler(Looper.getMainLooper())
     private val updateTrackDurationRunnable = object : Runnable {
         private var dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
         override fun run() {
-            if (playerState == STATE_PLAYING){
+            if (playerState == STATE_PLAYING) {
                 playTime.text = dateFormat.format(mediaPlayer.currentPosition)
                 handler.postDelayed(this, TRACK_DEBOUNCE_DELAY)
             }
-
         }
     }
 
@@ -69,6 +68,8 @@ class PlayerActivity : AppCompatActivity() {
             insets
         }
 
+        val searchHistoryInteractor = Creator.provideSearchHistoryInteractor(this)
+
         findViewById<ImageView>(R.id.back_arrow).setOnClickListener { finish() }
         play = findViewById(R.id.ibPlay)
         play.setOnClickListener {
@@ -77,7 +78,7 @@ class PlayerActivity : AppCompatActivity() {
         playTime = findViewById(R.id.tvPlayTime)
         val trackId = intent.getStringExtra(EXTRA_TRACK_ID)
         val track = trackId?.let { id ->
-            (application as App).searchHistory.getTracks().find { it.trackId == id }
+            searchHistoryInteractor.getTracks().find { it.trackId == id }
         }
 
         track?.let { bindTrack(it) }
@@ -96,7 +97,6 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun bindTrack(track: Track) {
-        val dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
         Glide.with(this)
             .load(track.getCoverArtwork())
             .centerCrop()
@@ -107,35 +107,36 @@ class PlayerActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvSongName).text = track.trackName
         findViewById<TextView>(R.id.tvArtistName).text = track.artistName
         findViewById<TextView>(R.id.tvDurationValue).text = track.formattedDuration
-        if (track.collectionName.isEmpty()){
+        if (track.collectionName.isEmpty()) {
             findViewById<Group>(R.id.groupAlbum).visibility = View.GONE
-        }
-        else{
+        } else {
             findViewById<TextView>(R.id.tvAlbumValue).text = track.collectionName
         }
-        if (track.releaseDate.isEmpty()){
+        if (track.releaseDate.isEmpty()) {
             findViewById<Group>(R.id.groupYear).visibility = View.GONE
-        }
-        else{
+        } else {
             findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.split("-")[0]
         }
         findViewById<TextView>(R.id.tvGenreValue).text = track.primaryGenreName
         findViewById<TextView>(R.id.tvCountryValue).text = track.country
     }
 
-    private fun preparePlayer(url: String?){
-        mediaPlayer.setDataSource(url)
-        mediaPlayer.setOnPreparedListener {
-            play.isEnabled = true
-            playerState = STATE_PREPARED
+    private fun preparePlayer(url: String?) {
+        if (url.isNullOrEmpty()) return
+        else {
+            mediaPlayer.setDataSource(url)
+            mediaPlayer.setOnPreparedListener {
+                play.isEnabled = true
+                playerState = STATE_PREPARED
+            }
+            mediaPlayer.setOnCompletionListener {
+                handler.removeCallbacks(updateTrackDurationRunnable)
+                playerState = STATE_PREPARED
+                play.setImageResource(R.drawable.ic_play_button_84)
+                playTime.setText(R.string.song_time_placeholder)
+            }
+            mediaPlayer.prepareAsync()
         }
-        mediaPlayer.setOnCompletionListener {
-            handler.removeCallbacks(updateTrackDurationRunnable)
-            playerState = STATE_PREPARED
-            play.setImageResource(R.drawable.ic_play_button_84)
-            playTime.setText(R.string.song_time_placeholder)
-        }
-        mediaPlayer.prepareAsync()
     }
 
     private fun startPlayer() {
@@ -145,14 +146,14 @@ class PlayerActivity : AppCompatActivity() {
         handler.postDelayed(updateTrackDurationRunnable, TRACK_DEBOUNCE_DELAY)
     }
 
-    private fun pausePlayer(){
+    private fun pausePlayer() {
         mediaPlayer.pause()
         play.setImageResource(R.drawable.ic_play_button_84)
         playerState = STATE_PAUSED
     }
 
     private fun playbackControl() {
-        when(playerState) {
+        when (playerState) {
             STATE_PLAYING -> {
                 pausePlayer()
             }
