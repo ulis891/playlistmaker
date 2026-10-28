@@ -2,7 +2,7 @@ package com.practicum.playlistmaker
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
-import com.practicum.playlistmaker.data.SearchHistoryRepository
+import com.practicum.playlistmaker.domain.api.SearchHistoryRepository
 import com.practicum.playlistmaker.domain.impl.SearchHistoryImpl
 
 class App : Application() {
