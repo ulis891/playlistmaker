@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.ui.tracks
+package com.practicum.playlistmaker.player.ui
 
 import android.os.Handler
 import android.os.Looper
@@ -12,8 +12,6 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.Utils
 import com.practicum.playlistmaker.domain.models.Track
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val rootLayout: LinearLayout = itemView.findViewById(R.id.rootLayout)

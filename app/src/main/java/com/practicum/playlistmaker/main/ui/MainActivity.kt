@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.ui.main
+package com.practicum.playlistmaker.main.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,10 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.practicum.playlistmaker.ui.media.MediaActivity
+import com.practicum.playlistmaker.media.ui.MediaActivity
 import com.practicum.playlistmaker.R
-import com.practicum.playlistmaker.ui.search.SearchActivity
-import com.practicum.playlistmaker.ui.settings.SettingsActivity
+import com.practicum.playlistmaker.search.ui.SearchActivity
+import com.practicum.playlistmaker.settings.ui.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

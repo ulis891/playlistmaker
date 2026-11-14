@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.ui.search
+package com.practicum.playlistmaker.search.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -26,8 +26,8 @@ import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.domain.api.SearchHistoryInteractor
 import com.practicum.playlistmaker.domain.api.TracksInteractor
 import com.practicum.playlistmaker.domain.models.Track
-import com.practicum.playlistmaker.ui.player.PlayerActivity
-import com.practicum.playlistmaker.ui.tracks.TrackAdapter
+import com.practicum.playlistmaker.player.ui.PlayerActivity
+import com.practicum.playlistmaker.player.ui.TrackAdapter
 
 class SearchActivity : AppCompatActivity() {
 
