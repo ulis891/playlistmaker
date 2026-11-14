@@ -13,7 +13,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.creator.Creator
 import com.practicum.playlistmaker.R
-import com.practicum.playlistmaker.domain.api.SettingsInteractor
+import com.practicum.playlistmaker.settings.domain.api.SettingsInteractor
 
 class SettingsActivity : AppCompatActivity() {
 

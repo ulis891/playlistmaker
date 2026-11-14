@@ -23,9 +23,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.practicum.playlistmaker.creator.Creator
 import com.practicum.playlistmaker.R
-import com.practicum.playlistmaker.domain.api.SearchHistoryInteractor
-import com.practicum.playlistmaker.domain.api.TracksInteractor
-import com.practicum.playlistmaker.domain.models.Track
+import com.practicum.playlistmaker.search.domain.api.SearchHistoryInteractor
+import com.practicum.playlistmaker.search.domain.api.TracksInteractor
+import com.practicum.playlistmaker.search.domain.models.Track
 import com.practicum.playlistmaker.player.ui.PlayerActivity
 import com.practicum.playlistmaker.player.ui.TrackAdapter
 

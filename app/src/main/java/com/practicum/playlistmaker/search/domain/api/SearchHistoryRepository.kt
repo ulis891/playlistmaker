@@ -1,6 +1,6 @@
-package com.practicum.playlistmaker.domain.api
+package com.practicum.playlistmaker.search.domain.api
 
-import com.practicum.playlistmaker.domain.models.Track
+import com.practicum.playlistmaker.search.domain.models.Track
 
 interface SearchHistoryRepository {
     fun addTrack(track: Track)

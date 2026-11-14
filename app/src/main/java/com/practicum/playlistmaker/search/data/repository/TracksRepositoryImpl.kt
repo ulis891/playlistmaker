@@ -4,8 +4,8 @@ import com.practicum.playlistmaker.search.data.NetworkClient
 import com.practicum.playlistmaker.search.data.dto.TrackDto
 import com.practicum.playlistmaker.search.data.dto.TracksSearchRequest
 import com.practicum.playlistmaker.search.data.dto.TracksSearchResponse
-import com.practicum.playlistmaker.domain.api.TracksRepository
-import com.practicum.playlistmaker.domain.models.Track
+import com.practicum.playlistmaker.search.domain.api.TracksRepository
+import com.practicum.playlistmaker.search.domain.models.Track
 import java.text.SimpleDateFormat
 import java.util.Locale
 
