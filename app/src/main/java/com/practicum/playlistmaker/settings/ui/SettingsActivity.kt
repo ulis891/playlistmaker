@@ -3,69 +3,70 @@ package com.practicum.playlistmaker.settings.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.switchmaterial.SwitchMaterial
+import androidx.lifecycle.ViewModelProvider
 import com.practicum.playlistmaker.App
-import com.practicum.playlistmaker.creator.Creator
 import com.practicum.playlistmaker.R
-import com.practicum.playlistmaker.settings.domain.api.SettingsInteractor
+import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
 
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var themeSwitcher: SwitchMaterial
-    private lateinit var settingsInteractor: SettingsInteractor
+
+    private var settingsViewModel: SettingsViewModel? = null
+    private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_settings)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        settingsInteractor = Creator.provideSettingsInteractor(this)
-
-        val backArrow = findViewById<ImageView>(R.id.back_arrow)
-        backArrow.setOnClickListener { finish() }
-
-        themeSwitcher = findViewById(R.id.switch_dark_mode)
-        themeSwitcher.setChecked(settingsInteractor.isDarkTheme())
-        themeSwitcher.setOnCheckedChangeListener { _, checked ->
-            (application as App).switchTheme(checked)
+        settingsViewModel = ViewModelProvider(this, SettingsViewModel.getFactory()).get(
+            SettingsViewModel::class.java)
+        settingsViewModel?.observeDarkMode()?.observe(this){ isDark ->
+            binding.switchDarkMode.isChecked = isDark
         }
 
-        val buttonShare = findViewById<LinearLayout>(R.id.clickable_share_row)
-        buttonShare.setOnClickListener {
-            val shareIntent = Intent()
-            shareIntent.action = Intent.ACTION_SEND
-            shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.url_practicum))
+        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            settingsViewModel?.toggleDarkMode(isChecked)
+            (application as App).switchTheme(isChecked)
+        }
+
+
+        binding.backArrow.setOnClickListener { finish() }
+
+        binding.clickableShareRow.setOnClickListener {
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, getString(R.string.url_practicum))
+            }
             startActivity(Intent.createChooser(shareIntent, getString(R.string.share_apk_title)))
         }
 
-        val buttonSupport = findViewById<LinearLayout>(R.id.clickable_support_row)
-        buttonSupport.setOnClickListener {
-            val supportIntent = Intent()
-            supportIntent.action = Intent.ACTION_SENDTO
-            supportIntent.data = Uri.parse("mailto:")
-            supportIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.my_email)))
-            supportIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.mail_subject))
-            supportIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.mail_text))
+        binding.clickableSupportRow.setOnClickListener {
+            val supportIntent = Intent().apply {
+                action = Intent.ACTION_SENDTO
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.my_email)))
+                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.mail_subject))
+                putExtra(Intent.EXTRA_TEXT, getString(R.string.mail_text))
+            }
             startActivity(supportIntent)
         }
 
-        val buttonAgreement = findViewById<LinearLayout>(R.id.clickable_agreement_row)
-        buttonAgreement.setOnClickListener {
-            val agreementIntent = Intent()
-            agreementIntent.action = Intent.ACTION_VIEW
-            agreementIntent.data = Uri.parse(getString(R.string.url_agreement))
+        binding.clickableAgreementRow.setOnClickListener {
+            val agreementIntent = Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = Uri.parse(getString(R.string.url_agreement))
+            }
             startActivity(agreementIntent)
         }
     }
