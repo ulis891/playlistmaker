@@ -2,10 +2,10 @@ package com.practicum.playlistmaker.creator
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.practicum.playlistmaker.data.network.RetrofitNetworkClient
-import com.practicum.playlistmaker.data.repository.SearchHistoryRepositoryImpl
-import com.practicum.playlistmaker.data.repository.SettingsRepositoryImpl
-import com.practicum.playlistmaker.data.repository.TracksRepositoryImpl
+import com.practicum.playlistmaker.search.data.network.RetrofitNetworkClient
+import com.practicum.playlistmaker.search.data.repository.SearchHistoryRepositoryImpl
+import com.practicum.playlistmaker.settings.data.repository.SettingsRepositoryImpl
+import com.practicum.playlistmaker.search.data.repository.TracksRepositoryImpl
 import com.practicum.playlistmaker.domain.api.SearchHistoryInteractor
 import com.practicum.playlistmaker.domain.api.SearchHistoryRepository
 import com.practicum.playlistmaker.domain.api.SettingsInteractor

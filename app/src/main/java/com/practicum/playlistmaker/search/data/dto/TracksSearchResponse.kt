@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.data.dto
+package com.practicum.playlistmaker.search.data.dto
 
 
 class TracksSearchResponse (val resultCount: Int,

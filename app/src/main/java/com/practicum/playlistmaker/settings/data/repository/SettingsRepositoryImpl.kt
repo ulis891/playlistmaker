@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.data.repository
+package com.practicum.playlistmaker.settings.data.repository
 
 import android.content.SharedPreferences
 import com.practicum.playlistmaker.domain.api.SettingsRepository

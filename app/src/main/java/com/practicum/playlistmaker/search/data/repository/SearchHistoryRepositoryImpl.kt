@@ -1,9 +1,9 @@
-package com.practicum.playlistmaker.data.repository
+package com.practicum.playlistmaker.search.data.repository
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.gson.Gson
-import com.practicum.playlistmaker.data.dto.TrackDto
+import com.practicum.playlistmaker.search.data.dto.TrackDto
 import com.practicum.playlistmaker.domain.api.SearchHistoryRepository
 import com.practicum.playlistmaker.domain.models.Track
 import java.text.SimpleDateFormat
