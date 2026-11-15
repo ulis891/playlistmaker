@@ -2,27 +2,20 @@ package com.practicum.playlistmaker.player.ui
 
 import android.content.Context
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.Group
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.practicum.playlistmaker.creator.Creator
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.Utils
+import com.practicum.playlistmaker.databinding.ActivityPlayerBinding
+import com.practicum.playlistmaker.player.ui.models.PlayerState
 import com.practicum.playlistmaker.search.domain.models.Track
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -33,67 +26,43 @@ class PlayerActivity : AppCompatActivity() {
             Intent(context, PlayerActivity::class.java).apply {
                 putExtra(EXTRA_TRACK_ID, trackId)
             }
-
-        private const val STATE_DEFAULT = 0
-        private const val STATE_PREPARED = 1
-        private const val STATE_PLAYING = 2
-        private const val STATE_PAUSED = 3
-
-        private const val TRACK_DEBOUNCE_DELAY = 1000L
     }
 
-    private var playerState = STATE_DEFAULT
-    private lateinit var play: ImageButton
-    private lateinit var playTime: TextView
-
-    private var mediaPlayer = MediaPlayer()
-    private val handler = Handler(Looper.getMainLooper())
-    private val updateTrackDurationRunnable = object : Runnable {
-        private var dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
-        override fun run() {
-            if (playerState == STATE_PLAYING) {
-                playTime.text = dateFormat.format(mediaPlayer.currentPosition)
-                handler.postDelayed(this, TRACK_DEBOUNCE_DELAY)
-            }
-        }
-    }
+    private lateinit var binding: ActivityPlayerBinding
+    private lateinit var viewModel: PlayerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_player)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.player)) { v, insets ->
+        binding = ActivityPlayerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.player) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val searchHistoryInteractor = Creator.provideSearchHistoryInteractor(this)
+        val trackId = intent.getStringExtra(EXTRA_TRACK_ID) ?: ""
 
-        findViewById<ImageView>(R.id.back_arrow).setOnClickListener { finish() }
-        play = findViewById(R.id.ibPlay)
-        play.setOnClickListener {
-            playbackControl()
-        }
-        playTime = findViewById(R.id.tvPlayTime)
-        val trackId = intent.getStringExtra(EXTRA_TRACK_ID)
-        val track = trackId?.let { id ->
-            searchHistoryInteractor.getTracks().find { it.trackId == id }
+        viewModel = ViewModelProvider(this, PlayerViewModel.getFactory(trackId))[PlayerViewModel::class.java]
+
+        binding.backArrow.setOnClickListener { finish() }
+        binding.ibPlay.setOnClickListener {
+            viewModel.playbackControl()
         }
 
-        track?.let { bindTrack(it) }
-        preparePlayer(track?.previewUrl)
+        viewModel.observeTrack().observe(this) { track ->
+            bindTrack(track)
+        }
+
+        viewModel.observePlayerState().observe(this) { state ->
+            renderState(state)
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        pausePlayer()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        handler.removeCallbacks(updateTrackDurationRunnable)
-        mediaPlayer.release()
+        viewModel.pausePlayer()
     }
 
     private fun bindTrack(track: Track) {
@@ -103,62 +72,51 @@ class PlayerActivity : AppCompatActivity() {
             .transform(RoundedCorners(Utils.dpToPx(8f, this)))
             .placeholder(R.drawable.album_placeholder)
             .error(R.drawable.album_placeholder)
-            .into(findViewById(R.id.ivAlbumCover))
-        findViewById<TextView>(R.id.tvSongName).text = track.trackName
-        findViewById<TextView>(R.id.tvArtistName).text = track.artistName
-        findViewById<TextView>(R.id.tvDurationValue).text = track.formattedDuration
+            .into(binding.ivAlbumCover)
+
+        binding.tvSongName.text = track.trackName
+        binding.tvArtistName.text = track.artistName
+        binding.tvDurationValue.text = track.formattedDuration
+
         if (track.collectionName.isEmpty()) {
-            findViewById<Group>(R.id.groupAlbum).visibility = View.GONE
+            binding.groupAlbum.visibility = View.GONE
         } else {
-            findViewById<TextView>(R.id.tvAlbumValue).text = track.collectionName
+            binding.groupAlbum.visibility = View.VISIBLE
+            binding.tvAlbumValue.text = track.collectionName
         }
+
         if (track.releaseDate.isEmpty()) {
-            findViewById<Group>(R.id.groupYear).visibility = View.GONE
+            binding.groupYear.visibility = View.GONE
         } else {
-            findViewById<TextView>(R.id.tvYearValue).text = track.releaseDate.split("-")[0]
+            binding.groupYear.visibility = View.VISIBLE
+            binding.tvYearValue.text = track.releaseDate.split("-")[0]
         }
-        findViewById<TextView>(R.id.tvGenreValue).text = track.primaryGenreName
-        findViewById<TextView>(R.id.tvCountryValue).text = track.country
+
+        binding.tvGenreValue.text = track.primaryGenreName
+        binding.tvCountryValue.text = track.country
     }
 
-    private fun preparePlayer(url: String?) {
-        if (url.isNullOrEmpty()) return
-        else {
-            mediaPlayer.setDataSource(url)
-            mediaPlayer.setOnPreparedListener {
-                play.isEnabled = true
-                playerState = STATE_PREPARED
+    private fun renderState(state: PlayerState) {
+        when (state) {
+            is PlayerState.Default -> {
+                binding.ibPlay.isEnabled = false
+                binding.ibPlay.setImageResource(R.drawable.ic_play_button_84)
+                binding.tvPlayTime.setText(R.string.song_time_placeholder)
             }
-            mediaPlayer.setOnCompletionListener {
-                handler.removeCallbacks(updateTrackDurationRunnable)
-                playerState = STATE_PREPARED
-                play.setImageResource(R.drawable.ic_play_button_84)
-                playTime.setText(R.string.song_time_placeholder)
+            is PlayerState.Prepared -> {
+                binding.ibPlay.isEnabled = true
+                binding.ibPlay.setImageResource(R.drawable.ic_play_button_84)
+                binding.tvPlayTime.setText(R.string.song_time_placeholder)
             }
-            mediaPlayer.prepareAsync()
-        }
-    }
-
-    private fun startPlayer() {
-        mediaPlayer.start()
-        play.setImageResource(R.drawable.ic_pause_button_84)
-        playerState = STATE_PLAYING
-        handler.postDelayed(updateTrackDurationRunnable, TRACK_DEBOUNCE_DELAY)
-    }
-
-    private fun pausePlayer() {
-        mediaPlayer.pause()
-        play.setImageResource(R.drawable.ic_play_button_84)
-        playerState = STATE_PAUSED
-    }
-
-    private fun playbackControl() {
-        when (playerState) {
-            STATE_PLAYING -> {
-                pausePlayer()
+            is PlayerState.Playing -> {
+                binding.ibPlay.isEnabled = true
+                binding.ibPlay.setImageResource(R.drawable.ic_pause_button_84)
+                binding.tvPlayTime.text = state.progress
             }
-            STATE_PREPARED, STATE_PAUSED -> {
-                startPlayer()
+            is PlayerState.Paused -> {
+                binding.ibPlay.isEnabled = true
+                binding.ibPlay.setImageResource(R.drawable.ic_play_button_84)
+                binding.tvPlayTime.text = state.progress
             }
         }
     }
