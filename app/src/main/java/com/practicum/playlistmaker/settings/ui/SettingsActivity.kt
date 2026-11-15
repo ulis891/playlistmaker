@@ -11,18 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
-import com.practicum.playlistmaker.sharing.ExternalNavigator
 import com.practicum.playlistmaker.sharing.data.EmailData
-import com.practicum.playlistmaker.sharing.domain.SharingInteractor
-import com.practicum.playlistmaker.sharing.domain.SharingInteractorImpl
 
 class SettingsActivity : AppCompatActivity() {
 
 
     private var settingsViewModel: SettingsViewModel? = null
     private lateinit var binding: ActivitySettingsBinding
-    private lateinit var sharingInteractor: SharingInteractor
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,37 +30,9 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        sharingInteractor = SharingInteractorImpl(object : ExternalNavigator {
-            override fun shareLink(link: String): Intent {
-                return Intent().apply {
-                    action = Intent.ACTION_SEND
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, link)
-                }
-            }
+        settingsViewModel = ViewModelProvider(this, SettingsViewModel.getFactory())[SettingsViewModel::class.java]
 
-            override fun openLink(link: String): Intent {
-                return Intent().apply {
-                    action = Intent.ACTION_VIEW
-                    data = Uri.parse(link)
-                }
-            }
-
-            override fun openEmail(emailData: EmailData): Intent {
-                return Intent().apply {
-                    action = Intent.ACTION_SENDTO
-                    data = Uri.parse("mailto:")
-                    putExtra(Intent.EXTRA_EMAIL, emailData.to)
-                    putExtra(Intent.EXTRA_SUBJECT, emailData.subject)
-                    putExtra(Intent.EXTRA_TEXT, emailData.body)
-                }
-            }
-        })
-
-
-        settingsViewModel = ViewModelProvider(this, SettingsViewModel.getFactory()).get(
-            SettingsViewModel::class.java)
-        settingsViewModel?.observeDarkMode()?.observe(this){ isDark ->
+        settingsViewModel.observeDarkMode().observe(this) { isDark ->
             binding.switchDarkMode.isChecked = isDark
         }
 
