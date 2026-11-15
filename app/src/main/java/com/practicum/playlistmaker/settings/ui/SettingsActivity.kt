@@ -11,12 +11,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
+import com.practicum.playlistmaker.sharing.ExternalNavigator
+import com.practicum.playlistmaker.sharing.data.EmailData
+import com.practicum.playlistmaker.sharing.domain.SharingInteractor
+import com.practicum.playlistmaker.sharing.domain.SharingInteractorImpl
 
 class SettingsActivity : AppCompatActivity() {
 
 
     private var settingsViewModel: SettingsViewModel? = null
     private lateinit var binding: ActivitySettingsBinding
+    private lateinit var sharingInteractor: SharingInteractor
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,35 @@ class SettingsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        sharingInteractor = SharingInteractorImpl(object : ExternalNavigator {
+            override fun shareLink(link: String): Intent {
+                return Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, link)
+                }
+            }
+
+            override fun openLink(link: String): Intent {
+                return Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = Uri.parse(link)
+                }
+            }
+
+            override fun openEmail(emailData: EmailData): Intent {
+                return Intent().apply {
+                    action = Intent.ACTION_SENDTO
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, emailData.to)
+                    putExtra(Intent.EXTRA_SUBJECT, emailData.subject)
+                    putExtra(Intent.EXTRA_TEXT, emailData.body)
+                }
+            }
+        })
+
+
         settingsViewModel = ViewModelProvider(this, SettingsViewModel.getFactory()).get(
             SettingsViewModel::class.java)
         settingsViewModel?.observeDarkMode()?.observe(this){ isDark ->
@@ -39,35 +74,25 @@ class SettingsActivity : AppCompatActivity() {
             (application as App).switchTheme(isChecked)
         }
 
-
         binding.backArrow.setOnClickListener { finish() }
 
         binding.clickableShareRow.setOnClickListener {
-            val shareIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, getString(R.string.url_practicum))
-            }
-            startActivity(Intent.createChooser(shareIntent, getString(R.string.share_apk_title)))
+            val intent = sharingInteractor.shareApp(getString(R.string.url_practicum))
+            startActivity(Intent.createChooser(intent, getString(R.string.share_apk_title)))
         }
 
+
         binding.clickableSupportRow.setOnClickListener {
-            val supportIntent = Intent().apply {
-                action = Intent.ACTION_SENDTO
-                data = Uri.parse("mailto:")
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.my_email)))
-                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.mail_subject))
-                putExtra(Intent.EXTRA_TEXT, getString(R.string.mail_text))
-            }
-            startActivity(supportIntent)
+            val emailData = EmailData(
+                to = arrayOf(getString(R.string.my_email)),
+                subject = getString(R.string.mail_subject),
+                body = getString(R.string.mail_text)
+            )
+            startActivity(sharingInteractor.openSupport(emailData))
         }
 
         binding.clickableAgreementRow.setOnClickListener {
-            val agreementIntent = Intent().apply {
-                action = Intent.ACTION_VIEW
-                data = Uri.parse(getString(R.string.url_agreement))
-            }
-            startActivity(agreementIntent)
+            startActivity(sharingInteractor.openTerms(getString(R.string.url_agreement)))
         }
     }
 }
