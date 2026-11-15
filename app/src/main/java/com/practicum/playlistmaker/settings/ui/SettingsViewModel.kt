@@ -10,8 +10,9 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.creator.Creator
+import com.practicum.playlistmaker.sharing.data.EmailData
 
-class SettingsViewModel(private val context: Context): ViewModel() {
+class SettingsViewModel(context: Context) : ViewModel() {
 
     companion object {
         fun getFactory(): ViewModelProvider.Factory = viewModelFactory {
@@ -23,6 +24,7 @@ class SettingsViewModel(private val context: Context): ViewModel() {
     }
 
     private val settingsInteractor = Creator.provideSettingsInteractor(context)
+    private val sharingInteractor = Creator.provideSharingInteractor(context)
 
     private val darkModeLiveData = MutableLiveData<Boolean>()
     fun observeDarkMode(): LiveData<Boolean> = darkModeLiveData
@@ -34,5 +36,17 @@ class SettingsViewModel(private val context: Context): ViewModel() {
     fun toggleDarkMode(enabled: Boolean) {
         settingsInteractor.setDarkTheme(enabled)
         darkModeLiveData.value = enabled
+    }
+
+    fun shareApp(link: String) {
+        sharingInteractor.shareApp(link)
+    }
+
+    fun openTerms(link: String) {
+        sharingInteractor.openTerms(link)
+    }
+
+    fun openSupport(emailData: EmailData) {
+        sharingInteractor.openSupport(emailData)
     }
 }

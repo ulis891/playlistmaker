@@ -1,7 +1,5 @@
 package com.practicum.playlistmaker.settings.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,8 +13,7 @@ import com.practicum.playlistmaker.sharing.data.EmailData
 
 class SettingsActivity : AppCompatActivity() {
 
-
-    private var settingsViewModel: SettingsViewModel? = null
+    private lateinit var settingsViewModel: SettingsViewModel
     private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,17 +34,15 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            settingsViewModel?.toggleDarkMode(isChecked)
+            settingsViewModel.toggleDarkMode(isChecked)
             (application as App).switchTheme(isChecked)
         }
 
         binding.backArrow.setOnClickListener { finish() }
 
         binding.clickableShareRow.setOnClickListener {
-            val intent = sharingInteractor.shareApp(getString(R.string.url_practicum))
-            startActivity(Intent.createChooser(intent, getString(R.string.share_apk_title)))
+            settingsViewModel.shareApp(getString(R.string.url_practicum))
         }
-
 
         binding.clickableSupportRow.setOnClickListener {
             val emailData = EmailData(
@@ -55,11 +50,11 @@ class SettingsActivity : AppCompatActivity() {
                 subject = getString(R.string.mail_subject),
                 body = getString(R.string.mail_text)
             )
-            startActivity(sharingInteractor.openSupport(emailData))
+            settingsViewModel.openSupport(emailData)
         }
 
         binding.clickableAgreementRow.setOnClickListener {
-            startActivity(sharingInteractor.openTerms(getString(R.string.url_agreement)))
+            settingsViewModel.openTerms(getString(R.string.url_agreement))
         }
     }
 }
