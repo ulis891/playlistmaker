@@ -2,56 +2,43 @@ package com.practicum.playlistmaker.player.ui
 
 import android.os.Handler
 import android.os.Looper
-import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.Utils
+import com.practicum.playlistmaker.databinding.ViewTrackBinding
 import com.practicum.playlistmaker.search.domain.models.Track
 
-class TrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    private val rootLayout: LinearLayout = itemView.findViewById(R.id.rootLayout)
-    private val ivTrackCover: ImageView = itemView.findViewById(R.id.ivAlbumCover)
-    private val tvTrackName: TextView = itemView.findViewById(R.id.tvSongName)
-    private val tvArtistName: TextView = itemView.findViewById(R.id.tvArtistName)
-    private val tvDuration: TextView = itemView.findViewById(R.id.tvSongDuration)
+class TrackViewHolder(private val binding: ViewTrackBinding) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
         private const val CLICK_DEBOUNCE_DELAY = 1000L
     }
-    var isClicked = true
+
+    private var isClicked = true
     private val handler = Handler(Looper.getMainLooper())
 
-    fun clickDebounce(): Boolean{
-            if (isClicked) {
-                    isClicked = false
-                    handler.postDelayed({ isClicked = true }, CLICK_DEBOUNCE_DELAY)
-                    return true
-            }
-            return false
+    fun clickDebounce(): Boolean {
+        if (isClicked) {
+            isClicked = false
+            handler.postDelayed({ isClicked = true }, CLICK_DEBOUNCE_DELAY)
+            return true
+        }
+        return false
     }
 
     fun bind(track: Track) {
-        val trackName = track.trackName
-        val artistName = track.artistName
-        val duration = track.formattedDuration
-        val albumArt = track.artworkUrl100
-
-        val context = itemView.context
+        binding.tvSongName.text = track.trackName
+        binding.tvArtistName.text = track.artistName
+        binding.tvSongDuration.text = track.formattedDuration
 
         Glide.with(itemView)
-            .load(albumArt)
+            .load(track.artworkUrl100)
             .centerCrop()
-            .transform(RoundedCorners(Utils.dpToPx(2f, context)))
+            .transform(RoundedCorners(Utils.dpToPx(2f, itemView.context)))
             .placeholder(R.drawable.album_image_placeholder_45)
             .error(R.drawable.album_image_placeholder_45)
-            .into(ivTrackCover)
-        tvTrackName.text = trackName
-        tvArtistName.text = artistName
-        tvDuration.text = duration
+            .into(binding.ivAlbumCover)
     }
 }
