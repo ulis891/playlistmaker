@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
 import com.practicum.playlistmaker.sharing.data.EmailData
@@ -35,7 +34,6 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             settingsViewModel.toggleDarkMode(isChecked)
-            (application as App).switchTheme(isChecked)
         }
 
         binding.backArrow.setOnClickListener { finish() }
