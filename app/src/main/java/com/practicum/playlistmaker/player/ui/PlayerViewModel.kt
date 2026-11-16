@@ -1,7 +1,6 @@
 package com.practicum.playlistmaker.player.ui
 
 import android.content.Context
-import android.media.MediaPlayer
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.LiveData
@@ -13,6 +12,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.creator.Creator
+import com.practicum.playlistmaker.player.domain.api.PlayerInteractor
 import com.practicum.playlistmaker.player.ui.models.PlayerState
 import com.practicum.playlistmaker.search.domain.models.Track
 import java.text.SimpleDateFormat
@@ -35,6 +35,7 @@ class PlayerViewModel(
     }
 
     private val searchHistoryInteractor = Creator.provideSearchHistoryInteractor(context)
+    private val playerInteractor: PlayerInteractor = Creator.providePlayerInteractor()
 
     private val trackLiveData = MutableLiveData<Track>()
     fun observeTrack(): LiveData<Track> = trackLiveData
@@ -42,7 +43,6 @@ class PlayerViewModel(
     private val playerStateLiveData = MutableLiveData<PlayerState>(PlayerState.Default)
     fun observePlayerState(): LiveData<PlayerState> = playerStateLiveData
 
-    private var mediaPlayer = MediaPlayer()
     private val handler = Handler(Looper.getMainLooper())
     private val dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
 
@@ -69,19 +69,16 @@ class PlayerViewModel(
 
     private fun preparePlayer(url: String?) {
         if (url.isNullOrEmpty()) return
-        try {
-            mediaPlayer.setDataSource(url)
-            mediaPlayer.setOnPreparedListener {
-                playerStateLiveData.value = PlayerState.Prepared
-            }
-            mediaPlayer.setOnCompletionListener {
+        playerInteractor.preparePlayer(
+            url = url,
+            onPrepared = {
+                playerStateLiveData.postValue(PlayerState.Prepared)
+            },
+            onCompletion = {
                 handler.removeCallbacks(updateTimeRunnable)
-                playerStateLiveData.value = PlayerState.Prepared
+                playerStateLiveData.postValue(PlayerState.Prepared)
             }
-            mediaPlayer.prepareAsync()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        )
     }
 
     fun playbackControl() {
@@ -93,26 +90,26 @@ class PlayerViewModel(
     }
 
     fun startPlayer() {
-        mediaPlayer.start()
+        playerInteractor.startPlayer()
         playerStateLiveData.value = PlayerState.Playing(getCurrentPositionFormatted())
         handler.postDelayed(updateTimeRunnable, UPDATE_DELAY)
     }
 
     fun pausePlayer() {
         if (playerStateLiveData.value is PlayerState.Playing) {
-            mediaPlayer.pause()
+            playerInteractor.pausePlayer()
             handler.removeCallbacks(updateTimeRunnable)
             playerStateLiveData.value = PlayerState.Paused(getCurrentPositionFormatted())
         }
     }
 
     private fun getCurrentPositionFormatted(): String {
-        return dateFormat.format(mediaPlayer.currentPosition)
+        return dateFormat.format(playerInteractor.getCurrentPosition())
     }
 
     override fun onCleared() {
         super.onCleared()
         handler.removeCallbacks(updateTimeRunnable)
-        mediaPlayer.release()
+        playerInteractor.release()
     }
 }
