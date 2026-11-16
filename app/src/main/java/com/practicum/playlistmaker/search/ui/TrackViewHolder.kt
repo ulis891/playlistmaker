@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.player.ui
+package com.practicum.playlistmaker.search.ui
 
 import android.os.Handler
 import android.os.Looper

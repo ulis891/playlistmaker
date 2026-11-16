@@ -1,6 +1,4 @@
-package com.practicum.playlistmaker.sharing
-
-import com.practicum.playlistmaker.sharing.data.EmailData
+package com.practicum.playlistmaker.sharing.domain
 
 interface ExternalNavigator {
     fun shareLink(link: String)

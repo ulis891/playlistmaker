@@ -1,7 +1,5 @@
 package com.practicum.playlistmaker.sharing.domain
 
-import com.practicum.playlistmaker.sharing.data.EmailData
-
 interface SharingInteractor {
     fun shareApp(link: String)
     fun openTerms(link: String)

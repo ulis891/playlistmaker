@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.sharing.data
+package com.practicum.playlistmaker.sharing.domain
 
 data class EmailData(
     val to: Array<String>,

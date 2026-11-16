@@ -10,7 +10,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.creator.Creator
-import com.practicum.playlistmaker.sharing.data.EmailData
+import com.practicum.playlistmaker.sharing.domain.EmailData
 
 class SettingsViewModel(context: Context) : ViewModel() {
 
