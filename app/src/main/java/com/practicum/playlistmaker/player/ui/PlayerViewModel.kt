@@ -1,6 +1,5 @@
 package com.practicum.playlistmaker.player.ui
 
-import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.LiveData
@@ -14,13 +13,15 @@ import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.creator.Creator
 import com.practicum.playlistmaker.player.domain.api.PlayerInteractor
 import com.practicum.playlistmaker.player.ui.models.PlayerState
+import com.practicum.playlistmaker.search.domain.api.SearchHistoryInteractor
 import com.practicum.playlistmaker.search.domain.models.Track
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class PlayerViewModel(
     private val trackId: String,
-    context: Context
+    private val playerInteractor: PlayerInteractor,
+    private val searchHistoryInteractor: SearchHistoryInteractor
 ) : ViewModel() {
 
     companion object {
@@ -29,13 +30,12 @@ class PlayerViewModel(
         fun getFactory(trackId: String): ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val app = (this[APPLICATION_KEY] as App)
-                PlayerViewModel(trackId, app)
+                val playerInteractor = Creator.providePlayerInteractor()
+                val searchHistoryInteractor = Creator.provideSearchHistoryInteractor(app)
+                PlayerViewModel(trackId, playerInteractor, searchHistoryInteractor)
             }
         }
     }
-
-    private val searchHistoryInteractor = Creator.provideSearchHistoryInteractor(context)
-    private val playerInteractor: PlayerInteractor = Creator.providePlayerInteractor()
 
     private val trackLiveData = MutableLiveData<Track>()
     fun observeTrack(): LiveData<Track> = trackLiveData
