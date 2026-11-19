@@ -1,0 +1,55 @@
+package com.practicum.playlistmaker.settings.ui
+
+ import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.practicum.playlistmaker.App
+import com.practicum.playlistmaker.creator.Creator
+import com.practicum.playlistmaker.settings.domain.api.SettingsInteractor
+import com.practicum.playlistmaker.sharing.domain.EmailData
+import com.practicum.playlistmaker.sharing.domain.SharingInteractor
+
+class SettingsViewModel(
+    private val settingsInteractor: SettingsInteractor,
+    private val sharingInteractor: SharingInteractor
+) : ViewModel() {
+
+    companion object {
+        fun getFactory(): ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val app = (this[APPLICATION_KEY] as App)
+                val settingsInteractor = Creator.provideSettingsInteractor(app)
+                val sharingInteractor = Creator.provideSharingInteractor(app)
+                SettingsViewModel(settingsInteractor, sharingInteractor)
+            }
+        }
+    }
+
+    private val darkModeLiveData = MutableLiveData<Boolean>()
+    fun observeDarkMode(): LiveData<Boolean> = darkModeLiveData
+
+    init {
+        darkModeLiveData.value = settingsInteractor.isDarkTheme()
+    }
+
+    fun toggleDarkMode(enabled: Boolean) {
+        settingsInteractor.setDarkTheme(enabled)
+        darkModeLiveData.value = enabled
+    }
+
+    fun shareApp(link: String) {
+        sharingInteractor.shareApp(link)
+    }
+
+    fun openTerms(link: String) {
+        sharingInteractor.openTerms(link)
+    }
+
+    fun openSupport(emailData: EmailData) {
+        sharingInteractor.openSupport(emailData)
+    }
+}
