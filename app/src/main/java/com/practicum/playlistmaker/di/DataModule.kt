@@ -8,6 +8,8 @@ import com.practicum.playlistmaker.search.data.repository.SearchHistoryRepositor
 import com.practicum.playlistmaker.search.domain.api.SearchHistoryInteractor
 import com.practicum.playlistmaker.search.domain.api.SearchHistoryRepository
 import com.practicum.playlistmaker.search.domain.impl.SearchHistoryInteractorImpl
+import com.practicum.playlistmaker.search.data.NetworkClient
+import com.practicum.playlistmaker.search.data.network.RetrofitNetworkClient
 import com.practicum.playlistmaker.sharing.data.ExternalNavigatorImpl
 import com.practicum.playlistmaker.sharing.domain.ExternalNavigator
 import org.koin.android.ext.koin.androidContext
@@ -22,6 +24,10 @@ val dataModule = module {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ITunesAPI::class.java)
+    }
+
+    single<NetworkClient> {
+        RetrofitNetworkClient()
     }
 
     single {
