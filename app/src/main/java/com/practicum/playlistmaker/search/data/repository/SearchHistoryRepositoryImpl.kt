@@ -63,7 +63,7 @@ class SearchHistoryRepositoryImpl(
         releaseDate = releaseDate,
         primaryGenreName = primaryGenreName,
         country = country,
-        previewUrl = previewUrl
+        previewUrl = previewUrl ?: ""
     )
 
     private fun Track.toDto(): TrackDto = TrackDto(

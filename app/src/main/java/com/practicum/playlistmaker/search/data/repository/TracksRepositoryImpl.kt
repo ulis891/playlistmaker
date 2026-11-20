@@ -31,7 +31,7 @@ class TracksRepositoryImpl(private val networkClient: NetworkClient) : TracksRep
         collectionName = collectionName,
         releaseDate = releaseDate,
         primaryGenreName = primaryGenreName,
-        country = country ,
-        previewUrl = previewUrl
+        country = country,
+        previewUrl = previewUrl ?: ""
     )
 }

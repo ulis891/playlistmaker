@@ -32,12 +32,13 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityPlayerBinding
-    val trackId = intent.getStringExtra(EXTRA_TRACK_ID) ?: ""
+    private lateinit var trackId: String
     private val viewModel: PlayerViewModel by viewModel { parametersOf(trackId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        trackId = intent.getStringExtra(EXTRA_TRACK_ID) ?: ""
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.player) { v, insets ->
