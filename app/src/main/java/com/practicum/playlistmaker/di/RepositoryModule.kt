@@ -9,6 +9,7 @@ import com.practicum.playlistmaker.search.domain.api.SearchHistoryRepository
 import com.practicum.playlistmaker.search.domain.api.TracksRepository
 import com.practicum.playlistmaker.settings.data.repository.SettingsRepositoryImpl
 import com.practicum.playlistmaker.settings.domain.api.SettingsRepository
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val repositoryModule = module {
@@ -17,11 +18,11 @@ val repositoryModule = module {
     }
 
     single<SearchHistoryRepository> {
-        SearchHistoryRepositoryImpl(get())
+        SearchHistoryRepositoryImpl(get(named("history")))
     }
 
     single<SettingsRepository> {
-        SettingsRepositoryImpl(get())
+        SettingsRepositoryImpl(get(named("app_settings")))
     }
 
     factory<PlayerRepository> {
