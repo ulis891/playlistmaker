@@ -26,15 +26,6 @@ class PlayerViewModel(
 
     companion object {
         private const val UPDATE_DELAY = 300L
-
-        fun getFactory(trackId: String): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val app = (this[APPLICATION_KEY] as App)
-                val playerInteractor = Creator.providePlayerInteractor()
-                val searchHistoryInteractor = Creator.provideSearchHistoryInteractor(app)
-                PlayerViewModel(trackId, playerInteractor, searchHistoryInteractor)
-            }
-        }
     }
 
     private val trackLiveData = MutableLiveData<Track>()

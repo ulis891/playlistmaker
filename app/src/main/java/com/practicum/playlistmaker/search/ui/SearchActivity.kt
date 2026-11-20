@@ -17,6 +17,8 @@ import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 import com.practicum.playlistmaker.player.ui.PlayerActivity
 import com.practicum.playlistmaker.search.domain.models.Track
 import com.practicum.playlistmaker.search.ui.models.SearchState
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class SearchActivity : AppCompatActivity() {
 
@@ -26,7 +28,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var viewModel: SearchViewModel
+
+    private val viewModel: SearchViewModel by viewModel<SearchViewModel>()
 
     private val trackList = mutableListOf<Track>()
     private val historyTrackList = mutableListOf<Track>()
@@ -46,8 +49,6 @@ class SearchActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        viewModel = ViewModelProvider(this, SearchViewModel.getFactory())[SearchViewModel::class.java]
 
         tracksAdapter = TrackAdapter(trackList) { track ->
             viewModel.onTrackClick(track)

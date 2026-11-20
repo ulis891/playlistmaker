@@ -9,10 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
 import com.practicum.playlistmaker.sharing.domain.EmailData
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var settingsViewModel: SettingsViewModel
+    private val settingsViewModel: SettingsViewModel by viewModel<SettingsViewModel>()
+
     private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +28,6 @@ class SettingsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        settingsViewModel = ViewModelProvider(this, SettingsViewModel.getFactory())[SettingsViewModel::class.java]
 
         settingsViewModel.observeDarkMode().observe(this) { isDark ->
             binding.switchDarkMode.isChecked = isDark

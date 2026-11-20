@@ -18,17 +18,6 @@ class SettingsViewModel(
     private val sharingInteractor: SharingInteractor
 ) : ViewModel() {
 
-    companion object {
-        fun getFactory(): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val app = (this[APPLICATION_KEY] as App)
-                val settingsInteractor = Creator.provideSettingsInteractor(app)
-                val sharingInteractor = Creator.provideSharingInteractor(app)
-                SettingsViewModel(settingsInteractor, sharingInteractor)
-            }
-        }
-    }
-
     private val darkModeLiveData = MutableLiveData<Boolean>()
     fun observeDarkMode(): LiveData<Boolean> = darkModeLiveData
 

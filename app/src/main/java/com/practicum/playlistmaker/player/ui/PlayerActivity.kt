@@ -16,6 +16,9 @@ import com.practicum.playlistmaker.Utils
 import com.practicum.playlistmaker.databinding.ActivityPlayerBinding
 import com.practicum.playlistmaker.player.ui.models.PlayerState
 import com.practicum.playlistmaker.search.domain.models.Track
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -29,7 +32,8 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityPlayerBinding
-    private lateinit var viewModel: PlayerViewModel
+    val trackId = intent.getStringExtra(EXTRA_TRACK_ID) ?: ""
+    private val viewModel: PlayerViewModel by viewModel { parametersOf(trackId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +46,8 @@ class PlayerActivity : AppCompatActivity() {
             insets
         }
 
-        val trackId = intent.getStringExtra(EXTRA_TRACK_ID) ?: ""
 
-        viewModel = ViewModelProvider(this, PlayerViewModel.getFactory(trackId))[PlayerViewModel::class.java]
+
 
         binding.backArrow.setOnClickListener { finish() }
         binding.ibPlay.setOnClickListener {
