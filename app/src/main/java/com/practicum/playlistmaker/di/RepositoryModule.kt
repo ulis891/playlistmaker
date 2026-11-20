@@ -24,7 +24,7 @@ val repositoryModule = module {
         SettingsRepositoryImpl(get())
     }
 
-    single<PlayerRepository> {
+    factory<PlayerRepository> {
         PlayerRepositoryImpl()
     }
 }

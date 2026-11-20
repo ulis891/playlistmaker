@@ -25,7 +25,7 @@ val interactorModule = module {
         SettingsInteractorImpl(get())
     }
 
-    single<PlayerInteractor> {
+    factory<PlayerInteractor> {
         PlayerInteractorImpl(get())
     }
 
