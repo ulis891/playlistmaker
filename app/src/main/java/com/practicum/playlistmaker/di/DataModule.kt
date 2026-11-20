@@ -8,6 +8,8 @@ import com.practicum.playlistmaker.search.data.repository.SearchHistoryRepositor
 import com.practicum.playlistmaker.search.domain.api.SearchHistoryInteractor
 import com.practicum.playlistmaker.search.domain.api.SearchHistoryRepository
 import com.practicum.playlistmaker.search.domain.impl.SearchHistoryInteractorImpl
+import com.practicum.playlistmaker.sharing.data.ExternalNavigatorImpl
+import com.practicum.playlistmaker.sharing.domain.ExternalNavigator
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -39,5 +41,9 @@ val dataModule = module {
 
     single<SearchHistoryInteractor> {
         SearchHistoryInteractorImpl(get())
+    }
+
+    single<ExternalNavigator> {
+        ExternalNavigatorImpl(androidContext())
     }
 }
