@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.practicum.playlistmaker.App
-import com.practicum.playlistmaker.creator.Creator
 import com.practicum.playlistmaker.settings.domain.api.SettingsInteractor
 import com.practicum.playlistmaker.sharing.domain.EmailData
 import com.practicum.playlistmaker.sharing.domain.SharingInteractor
