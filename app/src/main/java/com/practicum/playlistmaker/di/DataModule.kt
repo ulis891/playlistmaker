@@ -24,7 +24,7 @@ val dataModule = module {
     }
 
     single<NetworkClient> {
-        RetrofitNetworkClient()
+        RetrofitNetworkClient(get())
     }
 
     single<SharedPreferences>(named("app_settings")) {

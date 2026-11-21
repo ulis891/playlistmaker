@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class SearchHistoryRepositoryImpl(
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences,
+    private val gson: Gson
 ) : SearchHistoryRepository {
 
     companion object {
@@ -18,7 +19,6 @@ class SearchHistoryRepositoryImpl(
         private const val MAX_HISTORY_SIZE = 10
     }
 
-    private val gson = Gson()
     private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
 
     override fun addTrack(track: Track) {

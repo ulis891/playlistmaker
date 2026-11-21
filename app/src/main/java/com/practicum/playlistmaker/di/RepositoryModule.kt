@@ -18,7 +18,7 @@ val repositoryModule = module {
     }
 
     single<SearchHistoryRepository> {
-        SearchHistoryRepositoryImpl(get(named("history")))
+        SearchHistoryRepositoryImpl(get(named("history")), get())
     }
 
     single<SettingsRepository> {
