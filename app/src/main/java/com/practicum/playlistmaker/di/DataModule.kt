@@ -2,6 +2,7 @@ package com.practicum.playlistmaker.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import com.google.gson.Gson
 import com.practicum.playlistmaker.search.data.NetworkClient
 import com.practicum.playlistmaker.search.data.network.ITunesAPI
@@ -15,12 +16,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 val dataModule = module {
-    single<ITunesAPI> {
+    single<Retrofit> {
         Retrofit.Builder()
             .baseUrl("https://itunes.apple.com/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(get()))
             .build()
-            .create(ITunesAPI::class.java)
+    }
+
+    single<ITunesAPI> {
+        get<Retrofit>().create(ITunesAPI::class.java)
     }
 
     single<NetworkClient> {
@@ -37,6 +41,8 @@ val dataModule = module {
     }
 
     factory { Gson() }
+
+    factory { MediaPlayer() }
 
     single<ExternalNavigator> {
         ExternalNavigatorImpl(androidContext())
