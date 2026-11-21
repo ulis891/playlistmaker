@@ -54,5 +54,5 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.lifecycle.viewmodel)
-
+    implementation(libs.koin.android)
 }

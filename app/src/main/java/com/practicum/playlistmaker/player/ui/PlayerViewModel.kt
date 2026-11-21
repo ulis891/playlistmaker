@@ -5,12 +5,6 @@ import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.practicum.playlistmaker.App
-import com.practicum.playlistmaker.creator.Creator
 import com.practicum.playlistmaker.player.domain.api.PlayerInteractor
 import com.practicum.playlistmaker.player.ui.models.PlayerState
 import com.practicum.playlistmaker.search.domain.api.SearchHistoryInteractor
@@ -26,15 +20,6 @@ class PlayerViewModel(
 
     companion object {
         private const val UPDATE_DELAY = 300L
-
-        fun getFactory(trackId: String): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val app = (this[APPLICATION_KEY] as App)
-                val playerInteractor = Creator.providePlayerInteractor()
-                val searchHistoryInteractor = Creator.provideSearchHistoryInteractor(app)
-                PlayerViewModel(trackId, playerInteractor, searchHistoryInteractor)
-            }
-        }
     }
 
     private val trackLiveData = MutableLiveData<Track>()

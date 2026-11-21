@@ -8,7 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.practicum.playlistmaker.R
@@ -16,6 +15,9 @@ import com.practicum.playlistmaker.Utils
 import com.practicum.playlistmaker.databinding.ActivityPlayerBinding
 import com.practicum.playlistmaker.player.ui.models.PlayerState
 import com.practicum.playlistmaker.search.domain.models.Track
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -29,11 +31,13 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityPlayerBinding
-    private lateinit var viewModel: PlayerViewModel
+    private lateinit var trackId: String
+    private val viewModel: PlayerViewModel by viewModel { parametersOf(trackId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        trackId = intent.getStringExtra(EXTRA_TRACK_ID) ?: ""
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.player) { v, insets ->
@@ -42,9 +46,8 @@ class PlayerActivity : AppCompatActivity() {
             insets
         }
 
-        val trackId = intent.getStringExtra(EXTRA_TRACK_ID) ?: ""
 
-        viewModel = ViewModelProvider(this, PlayerViewModel.getFactory(trackId))[PlayerViewModel::class.java]
+
 
         binding.backArrow.setOnClickListener { finish() }
         binding.ibPlay.setOnClickListener {
