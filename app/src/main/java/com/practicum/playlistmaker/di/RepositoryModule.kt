@@ -2,7 +2,6 @@ package com.practicum.playlistmaker.di
 
 import com.practicum.playlistmaker.player.data.repository.PlayerRepositoryImpl
 import com.practicum.playlistmaker.player.domain.api.PlayerRepository
-import com.practicum.playlistmaker.search.data.NetworkClient
 import com.practicum.playlistmaker.search.data.repository.SearchHistoryRepositoryImpl
 import com.practicum.playlistmaker.search.data.repository.TracksRepositoryImpl
 import com.practicum.playlistmaker.search.domain.api.SearchHistoryRepository
@@ -14,7 +13,7 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single<TracksRepository> {
-        TracksRepositoryImpl(get<NetworkClient>())
+        TracksRepositoryImpl(get())
     }
 
     single<SearchHistoryRepository> {
@@ -26,6 +25,6 @@ val repositoryModule = module {
     }
 
     factory<PlayerRepository> {
-        PlayerRepositoryImpl(get())
+        PlayerRepositoryImpl( get())
     }
 }
